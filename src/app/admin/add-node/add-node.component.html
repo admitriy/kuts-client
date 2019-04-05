@@ -1,0 +1,22 @@
+<div class="admin-panel">
+  <mat-form-field class="admin-element">
+    <input matInput placeholder="Название">
+  </mat-form-field>
+
+  <mat-form-field class="admin-element">
+    <input matInput placeholder="Заголовок">
+  </mat-form-field>
+
+  <mat-form-field class="admin-element">
+    <mat-select placeholder="Выберите тип контента">
+      <mat-option value="option">PDF</mat-option>
+      <mat-option value="option">FLESH</mat-option>
+      <mat-option value="option">HTML</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <input type="file" id="input" (change)="uploadFile($event)">
+
+  <button class="admin-element" mat-raised-button color="primary">Сохранить</button>
+  <button (click)="back()" class="admin-element" mat-raised-button>Назад</button>
+</div>
