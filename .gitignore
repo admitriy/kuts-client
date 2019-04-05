@@ -1,2 +1,10 @@
 node_modules
 package-lock.json
+.idea/workspace.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/codeStyles/Project.xml
+.idea/vcs.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/kuts-client-master.iml
