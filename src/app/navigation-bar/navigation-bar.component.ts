@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
@@ -6,12 +6,14 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { NavigationBarService } from '../http-client/navigation-bar.service';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {Router} from '@angular/router';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
 
 @Component({
   selector: 'app-navigation-bar',
   templateUrl: './navigation-bar.component.html',
   styleUrls: ['./navigation-bar.component.css']
+})
+@Injectable({
+  providedIn: 'root'
 })
 export class NavigationBarComponent implements OnInit {
 
@@ -48,11 +50,16 @@ export class NavigationBarComponent implements OnInit {
   }
 
   getSelectedNode(node: GetNavigationBarItemsResponse, event: any) {
-      this.selectedNode = node;
+    const rootRout = this.router.url.split('/')[1];
+    this.selectedNode = node;
+    if (rootRout === 'panel') { //TODO
+      this.router.navigate(['/panel/node', this.selectedNode.id]);
+    } else {
       const content = this.selectedNode.content;
       if ((!content.content) || (!content.contentType)) {
         return;
       }
       this.router.navigate(['/' + this.fileFormats[content.contentType], this.selectedNode.id]);
+    }
   }
 }

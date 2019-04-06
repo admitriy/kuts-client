@@ -1,22 +1,30 @@
-<div class="admin-panel">
-  <mat-form-field class="admin-element">
-    <input matInput placeholder="Название">
-  </mat-form-field>
+<form name="editForm" role="form" novalidate #editForm="ngForm"
+      (ngSubmit)="save()" xmlns="http://www.w3.org/1999/html">
+  <div class="admin-panel">
+    <mat-form-field class="admin-element">
+      <input matInput placeholder="Название" [(ngModel)]="node.fullName" name="fullName" required>
+    </mat-form-field>
 
-  <mat-form-field class="admin-element">
-    <input matInput placeholder="Заголовок">
-  </mat-form-field>
+    <mat-form-field class="admin-element">
+      <input matInput placeholder="Заголовок" [(ngModel)]="node.header" name="header" required>
+    </mat-form-field>
 
-  <mat-form-field class="admin-element">
-    <mat-select placeholder="Выберите тип контента">
-      <mat-option value="option">PDF</mat-option>
-      <mat-option value="option">FLESH</mat-option>
-      <mat-option value="option">HTML</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field class="admin-element" >
+      <mat-select placeholder="Выберите тип контента" [(ngModel)]="node.content.contentType" name="content.contentType" required>
+        <mat-option value="PDF">PDF</mat-option>
+        <mat-option value="FLESH">FLESH</mat-option>
+        <mat-option value="HTML">HTML</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <input type="file" id="input" (change)="uploadFile($event)">
+    <input type="text" hidden="true" [(ngModel)]="node.content.content" name="content.content" required>
 
-  <button class="admin-element" mat-raised-button color="primary">Сохранить</button>
-  <button (click)="back()" class="admin-element" mat-raised-button>Назад</button>
-</div>
+    <input #file type="file" hidden="true" (change)="uploadFile($event, upload);">
+    <button class="admin-element" mat-raised-button #upload (click)="uploaded ? removeContent(upload) : file.click();" type = "button">
+      {{uploaded ? 'Удалить контент' : 'Загрузить контент'}}
+    </button>
+
+    <button class="admin-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>
+    <button type = "button" (click)="back()" class="admin-element" mat-raised-button>Назад</button>
+  </div>
+</form>

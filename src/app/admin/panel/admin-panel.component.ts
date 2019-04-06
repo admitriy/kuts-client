@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
@@ -8,12 +8,16 @@ import {Router} from '@angular/router';
 })
 export class AdminPanelComponent implements OnInit {
   node = false;
-  constructor(private router: Router){ }
+  constructor(private router: Router,
+              private routeSub: ActivatedRoute){ }
 
   ngOnInit() {
   }
 
   addNodeNavigate() {
-    this.router.navigate(['panel/add-node']);
+    this.routeSub.params.subscribe((param) => {
+      const navigate = param['nodeId'] ? ['panel/add-node', param.nodeId] : ['panel/add-node'];
+      this.router.navigate(navigate);
+    });
   }
 }

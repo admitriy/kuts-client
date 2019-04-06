@@ -40,7 +40,7 @@ import {AddNodeRoute} from './admin/add-node/add-node.route';
     MatNativeDateModule,
     ReactiveFormsModule,
     PdfViewerModule,
-    RouterModule.forRoot([PdfViewerRoute, FlashViewerRoute, AdminPanelRoute, AddNodeRoute]) //TODO
+    RouterModule.forRoot([PdfViewerRoute, FlashViewerRoute, ...AdminPanelRoute, ...AddNodeRoute]) //TODO
   ],
   providers: [],
   bootstrap: [AppComponent]
