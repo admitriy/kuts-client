@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+import {NavigationBarService} from '../../http-client/navigation-bar.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -7,17 +8,27 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./admin-panel.component.css']
 })
 export class AdminPanelComponent implements OnInit {
-  node = false;
+  node;
   constructor(private router: Router,
-              private routeSub: ActivatedRoute){ }
+              private routeSub: ActivatedRoute,
+              private navigationBarService: NavigationBarService){ }
 
   ngOnInit() {
+    this.routeSub.params.subscribe((param) => {
+      this.node = param['nodeId'];
+    });
   }
 
   addNodeNavigate() {
-    this.routeSub.params.subscribe((param) => {
-      const navigate = param['nodeId'] ? ['panel/add-node', param.nodeId] : ['panel/add-node'];
-      this.router.navigate(navigate);
-    });
+    const navigate = this.node ? ['panel/add-node', this.node] : ['panel/add-node'];
+    this.router.navigate(navigate);
+  }
+
+  updateNodeNavigate() {
+    this.router.navigate(['panel/edit-node', this.node]);
+  }
+
+  deleteNode() {
+    this.navigationBarService.deleteNode(this.node).subscribe();
   }
 }

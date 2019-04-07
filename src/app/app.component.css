@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Museo-1;
+  src: url("../assets/font/MuseoSansCyrl_1.otf") format("opentype");
+}
+
 .content {
   display: inline;
   width: 980px;
@@ -27,7 +32,7 @@
   font-weight: 400;
   text-decoration: none;
   padding-top: 2px;
-
+  font-family: 'Museo-1';
 }
 
 .header_wrapper {
@@ -66,5 +71,4 @@
 .logo__text--description {
   font-size: 20px;
 }
-
 

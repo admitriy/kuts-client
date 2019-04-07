@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Museo-0;
+  src: url("../../assets/font/MuseoSansCyrl_0.otf") format("opentype");
+}
+
 .example-tree-invisible {
     display: none;
   }
@@ -10,5 +15,6 @@
   }
 
   .node-name {
+    font-family: "Museo-0";
     cursor: pointer;
   }

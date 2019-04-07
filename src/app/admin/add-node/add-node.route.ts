@@ -1,4 +1,4 @@
-import {Route, Routes} from '@angular/router';
+import {Routes} from '@angular/router';
 
 import {AddNodeComponent} from './add-node.component';
 
@@ -13,5 +13,11 @@ export const AddNodeRoute: Routes = [{
   component: AddNodeComponent,
   data: {
     pageTitle: 'Просмотр add node'
+  }
+}, {
+  path: 'panel/edit-node/:nodeId',
+  component: AddNodeComponent,
+  data: {
+    pageTitle: 'Просмотр edit node'
   }
 }];

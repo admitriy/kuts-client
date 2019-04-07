@@ -4,7 +4,6 @@ import {NavigationBarService} from '../../http-client/navigation-bar.service';
 import {GetNavigationBarItemsResponse} from '../../http-client/response/get-navigation-bar-items-response';
 import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
 import {ActivatedRoute} from '@angular/router';
-import {NavigationBarComponent} from '../../navigation-bar/navigation-bar.component';
 
 @Component({
   selector: 'app-admin-panel',
@@ -17,14 +16,17 @@ export class AddNodeComponent implements OnInit {
 
   constructor(private location: Location,
               private navigationBarService: NavigationBarService,
-              private routeSub: ActivatedRoute,
-              private navigationBarComponent: NavigationBarComponent) { }
+              private routeSub: ActivatedRoute) { }
 
   ngOnInit() {
     this.node = {} as GetNavigationBarItemsResponse;
     this.node.content = {} as NavigationBarItemContent;
     this.routeSub.params.subscribe((param) => {
-      this.node.parentNode = param.parentId;
+      if (param.parentId) {
+        this.node.parentNode = param.parentId;
+      } else if (param.nodeId) {
+        this.navigationBarService.getItem(param.nodeId).subscribe(node => this.node = node);
+      }
     });
   }
 
@@ -49,9 +51,12 @@ export class AddNodeComponent implements OnInit {
   }
 
   removeContent(upload: any) {
-    upload.color = 'basic';
-    this.uploaded = false;
-    this.node.content.content = '';
-    console.log("Контент удалён (НЕТ)");
+    upload._disabled = true;
+    this.navigationBarService.deleteFile(this.node.content.content).subscribe(e => {
+      upload.color = 'basic';
+      this.uploaded = false;
+      this.node.content.content = '';
+      upload._disabled = false;
+    });
   }
 }

@@ -23,6 +23,18 @@ export class NavigationBarService {
     return this.http.get<GetNavigationBarItemsResponse>(this.baseUrl + 'node/' + id);
   }
 
+  saveNode(node: GetNavigationBarItemsResponse) {
+    return this.http.post<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node);
+  }
+
+  updateNode(node: GetNavigationBarItemsResponse) {
+    return this.http.put<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node);
+  }
+
+  deleteNode(nodeId: any) {
+    return this.http.delete(this.baseUrl + 'node/' + nodeId);
+  }
+
   uploadFile(file: any) {
     const formData = new FormData();
     formData.append('file', file);
@@ -31,8 +43,8 @@ export class NavigationBarService {
     return this.http.post(this.baseUrl + 'file/', formData, {headers: headers});
   }
 
-  saveNode(node: GetNavigationBarItemsResponse) {
-    return this.http.post<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node);
+  deleteFile(fileId: any) {
+    return this.http.delete(this.baseUrl + 'file/' + fileId);
   }
 }
 
