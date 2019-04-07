@@ -11,7 +11,6 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./add-node.component.css']
 })
 export class AddNodeComponent implements OnInit {
-  uploaded = false;
   node: GetNavigationBarItemsResponse;
 
   constructor(private location: Location,
@@ -34,7 +33,6 @@ export class AddNodeComponent implements OnInit {
     upload._disabled = true;
     this.navigationBarService.uploadFile(event.target.files[0]).subscribe(e => {
       this.node.content.content = e;
-      upload.color = 'accent';
       this.uploaded = true;
       upload._disabled = false;
     });
@@ -53,7 +51,6 @@ export class AddNodeComponent implements OnInit {
   removeContent(upload: any) {
     upload._disabled = true;
     this.navigationBarService.deleteFile(this.node.content.content).subscribe(e => {
-      upload.color = 'basic';
       this.uploaded = false;
       this.node.content.content = '';
       upload._disabled = false;

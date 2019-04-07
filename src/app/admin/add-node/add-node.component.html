@@ -21,8 +21,10 @@
     <input type="text" hidden="true" [(ngModel)]="node.content.content" name="content.content" required>
 
     <input #file type="file" hidden="true" (change)="uploadFile($event, upload);">
-    <button class="admin-element" mat-raised-button #upload (click)="uploaded ? removeContent(upload) : file.click();" type = "button">
-      {{uploaded ? 'Удалить контент' : 'Загрузить контент'}}
+    <button type = "button" class="admin-element" mat-raised-button #upload
+            (click)="node.content.content ? removeContent(upload) : file.click();"
+            color="{{node.content.content ? 'accent' : 'basic'}}">
+      {{node.content.content ? 'Удалить контент' : 'Загрузить контент'}}
     </button>
 
     <button class="admin-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>

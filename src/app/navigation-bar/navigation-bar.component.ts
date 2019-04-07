@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
   providedIn: 'root'
 })
 export class NavigationBarComponent implements OnInit {
+  currentTarget;
 
   constructor(
     private navigationBarService: NavigationBarService,
@@ -50,6 +51,12 @@ export class NavigationBarComponent implements OnInit {
   }
 
   getSelectedNode(node: GetNavigationBarItemsResponse, event: any) {
+    if (this.currentTarget) {
+      this.currentTarget.style.textDecoration = 'none';
+    }
+
+    this.currentTarget = event.target;
+    this.currentTarget.style.textDecoration = 'underline';
     const rootRout = this.router.url.split('/')[1];
     this.selectedNode = node;
     if (rootRout === 'panel') { //TODO

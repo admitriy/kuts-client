@@ -4,7 +4,7 @@
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-      <p class="node-name" (click)="getSelectedNode(node)">{{node.fullName}}</p>
+      <p class="node-name" (click)="getSelectedNode(node, $event)">{{node.fullName}}</p>
     </li>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
@@ -17,7 +17,7 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon> <!-- Стрелка, которую нужно убрать -->
         </button>
-        <p class="node-name" (click)="getSelectedNode(node)">{{node.fullName}}</p>
+        <p class="node-name" (click)="getSelectedNode(node, $event)">{{node.fullName}}</p>
       </div>
       <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
         <ng-container matTreeNodeOutlet></ng-container>
