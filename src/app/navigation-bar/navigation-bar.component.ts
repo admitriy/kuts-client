@@ -1,5 +1,4 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import { Observable } from 'rxjs';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import {MatTreeNestedDataSource} from '@angular/material/tree';
 

@@ -33,7 +33,6 @@ export class AddNodeComponent implements OnInit {
     upload._disabled = true;
     this.navigationBarService.uploadFile(event.target.files[0]).subscribe(e => {
       this.node.content.content = e;
-      this.uploaded = true;
       upload._disabled = false;
     });
   }
@@ -51,7 +50,6 @@ export class AddNodeComponent implements OnInit {
   removeContent(upload: any) {
     upload._disabled = true;
     this.navigationBarService.deleteFile(this.node.content.content).subscribe(e => {
-      this.uploaded = false;
       this.node.content.content = '';
       upload._disabled = false;
     });

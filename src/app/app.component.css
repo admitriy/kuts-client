@@ -7,7 +7,7 @@
   display: inline;
   width: 980px;
   overflow: auto;
-  height: 100%;
+  margin-left: 100px;
 }
 
 .menu {
