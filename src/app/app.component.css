@@ -4,10 +4,10 @@
 }
 
 .content {
-  display: inline;
-  width: 980px;
+  display: flex;
+  justify-content: center;
+  height: 800px;
   overflow: auto;
-  margin-left: 100px;
 }
 
 .menu {
