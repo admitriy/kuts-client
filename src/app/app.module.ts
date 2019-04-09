@@ -19,6 +19,8 @@ import {AdminPanelRoute} from './admin/panel/admin-panel.route';
 import {AdminPanelComponent} from './admin/panel/admin-panel.component';
 import {AddNodeComponent} from './admin/add-node/add-node.component';
 import {AddNodeRoute} from './admin/add-node/add-node.route';
+import {HtmlViewerComponent} from './files/html-viewer/html-viewer.component';
+import {HtmlViewerRoute} from './files/html-viewer/html-viewer.route';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {AddNodeRoute} from './admin/add-node/add-node.route';
     PdfViewerComponent,
     FlashViewerComponent,
     AdminPanelComponent,
-    AddNodeComponent
+    AddNodeComponent,
+    HtmlViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import {AddNodeRoute} from './admin/add-node/add-node.route';
     MatNativeDateModule,
     ReactiveFormsModule,
     PdfViewerModule,
-    RouterModule.forRoot([PdfViewerRoute, FlashViewerRoute, ...AdminPanelRoute, ...AddNodeRoute]) //TODO
+    RouterModule.forRoot([PdfViewerRoute, FlashViewerRoute, ...AdminPanelRoute, ...AddNodeRoute, HtmlViewerRoute]) //TODO
   ],
   providers: [],
   bootstrap: [AppComponent]
