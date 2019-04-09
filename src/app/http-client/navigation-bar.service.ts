@@ -40,7 +40,7 @@ export class NavigationBarService {
     formData.append('file', file);
     const headers = new HttpHeaders({'enctype': 'multipart/form-data'});
 
-    return this.http.post(this.baseUrl + 'file/', formData, {headers: headers});
+    return this.http.post<string>(this.baseUrl + 'file/', formData, {headers: headers});
   }
 
   deleteFile(fileId: any) {
