@@ -24,7 +24,7 @@
           <mat-form-field class="choice__input">
             <input matInput placeholder="Вариант ответа" [(ngModel)]="choice.choiceName" name="question.{{questionIndex}}.choices.{{choiceIndex}}.choiceName">
           </mat-form-field>
-          <mat-checkbox [(ngModel)]="choice.correct" name="choice.{{choiceIndex}}.correct"></mat-checkbox>
+          <mat-checkbox [(ngModel)]="choice.correct" name="question.{{questionIndex}}.choices.{{choiceIndex}}.correct"></mat-checkbox>
           <button type = "button" mat-icon-button (click)="removeChoice(questionIndex, choiceIndex);">
             <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
           </button>
