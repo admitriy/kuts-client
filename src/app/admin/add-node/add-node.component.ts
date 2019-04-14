@@ -19,7 +19,6 @@ export class AddNodeComponent implements OnInit {
 
   ngOnInit() {
     this.node = {} as GetNavigationBarItemsResponse;
-    // this.node.content = {} as NavigationBarItemContent;
     this.routeSub.params.subscribe((param) => {
       if (param.parentId) {
         this.node.parentNode = param.parentId;

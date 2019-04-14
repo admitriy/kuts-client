@@ -1,0 +1,59 @@
+.test-form {
+  width: 700px;
+}
+
+.test-element{
+  margin-bottom: 20px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.test-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.question {
+  border: 2px solid #909090;
+  padding: 20px 50px;
+}
+
+.question__name {
+  width: 100%;
+}
+
+.choice__block {
+  border: 2px solid #c0c0c0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.choice__input {
+  margin-right: 20px;
+  width: 100%;
+}
+
+.choice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /*margin-top: 20px;*/
+}
+
+.choice__add-button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.choice__button {
+  display: flex;
+  /*align-items: center;*/
+}

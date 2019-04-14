@@ -2,6 +2,6 @@
   <button (click)="addNodeNavigate()" class="admin-button" mat-raised-button>Добавить дочерний элемент</button>
   <button (click)="updateNodeNavigate()" [disabled]="!node" class="admin-button" mat-raised-button>Редактировать текущий элемент</button>
   <button (click)="addContentNavigate()" [disabled]="!node" class="admin-button" mat-raised-button>Добавление и редактирование контента</button>
-  <button [disabled]="true" class="admin-button" mat-raised-button >Добавить тест</button>
+  <button (click)="addTestNavigate()" [disabled]="!node" class="admin-button" mat-raised-button >Добавление и редактирование теста</button>
   <button (click)="deleteNode()" [disabled]="!node" class="admin-button" mat-raised-button>Удалить</button>
 </div>
