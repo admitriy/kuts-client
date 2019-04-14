@@ -2,6 +2,7 @@ import {Component, OnInit, Input, ViewChild, SecurityContext} from '@angular/cor
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationBarService } from '../../http-client/navigation-bar.service';
 import {DomSanitizer} from '@angular/platform-browser';
+import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
 
 @Component({
   selector: 'app-flash-viewer',
@@ -11,7 +12,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 export class FlashViewerComponent implements OnInit {
   objectSwf;
   flashLink;
-  link = 'http://18.222.201.152:8084/api/1/file/'; //TODO
+  link = 'http://localhost:8084/api/1/file/'; //TODO
+  @Input() content: NavigationBarItemContent;
 
   @ViewChild('swfDiv') swfDiv;
 
@@ -21,15 +23,13 @@ export class FlashViewerComponent implements OnInit {
     private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
-    this.routeSub.params.subscribe((param) => {
-      this.navigationBarService.getItem(param.nodeId).subscribe(node => {
-        this.flashLink = this.link + node.content.content;
-        this.objectSwf = '<object type="application/x-shockwave-flash" width="700px" height="700px" *ngIf="flashLink">\n' +
-          '  <param name="wmode" value="transparent" />\n' +
-          '  <param name="movie" value="'+this.flashLink+'" />\n' +
-          '</object>';
-        this.swfDiv.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.objectSwf));
-      });
-    });
+    if (this.content) {
+      this.flashLink = this.link + this.content.content;
+      this.objectSwf = '<object type="application/x-shockwave-flash" width="700px" height="700px" *ngIf="flashLink">\n' +
+        '  <param name="wmode" value="transparent" />\n' +
+        '  <param name="movie" value="' + this.flashLink + '" />\n' +
+        '</object>';
+      this.swfDiv.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.objectSwf));
+    }
   }
 }

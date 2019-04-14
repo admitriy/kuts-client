@@ -21,6 +21,10 @@ import {AddNodeComponent} from './admin/add-node/add-node.component';
 import {AddNodeRoute} from './admin/add-node/add-node.route';
 import {HtmlViewerComponent} from './files/html-viewer/html-viewer.component';
 import {HtmlViewerRoute} from './files/html-viewer/html-viewer.route';
+import {ContentComponent} from './content/content.component';
+import {ContentRoute} from './content/content.route';
+import {AddContentComponent} from './admin/add-content/add-content.component';
+import {AddContentRoute} from './admin/add-content/add-content.route';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import {HtmlViewerRoute} from './files/html-viewer/html-viewer.route';
     FlashViewerComponent,
     AdminPanelComponent,
     AddNodeComponent,
-    HtmlViewerComponent
+    HtmlViewerComponent,
+    ContentComponent,
+    AddContentComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,14 @@ import {HtmlViewerRoute} from './files/html-viewer/html-viewer.route';
     MatNativeDateModule,
     ReactiveFormsModule,
     PdfViewerModule,
-    RouterModule.forRoot([PdfViewerRoute, FlashViewerRoute, ...AdminPanelRoute, ...AddNodeRoute, HtmlViewerRoute]) //TODO
+    RouterModule.forRoot([
+      PdfViewerRoute,
+      FlashViewerRoute,
+      ...AdminPanelRoute,
+      ...AddNodeRoute,
+      HtmlViewerRoute,
+      ContentRoute,
+      AddContentRoute]) //TODO
   ],
   providers: [],
   bootstrap: [AppComponent]

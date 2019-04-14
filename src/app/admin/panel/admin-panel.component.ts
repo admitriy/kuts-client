@@ -28,6 +28,10 @@ export class AdminPanelComponent implements OnInit {
     this.router.navigate(['panel/edit-node', this.node]);
   }
 
+  addContentNavigate() {
+    this.router.navigate(['panel/add-content', this.node]);
+  }
+
   deleteNode() {
     this.navigationBarService.deleteNode(this.node).subscribe();
   }

@@ -19,23 +19,23 @@ export class AddNodeComponent implements OnInit {
 
   ngOnInit() {
     this.node = {} as GetNavigationBarItemsResponse;
-    this.node.content = {} as NavigationBarItemContent;
+    // this.node.content = {} as NavigationBarItemContent;
     this.routeSub.params.subscribe((param) => {
       if (param.parentId) {
         this.node.parentNode = param.parentId;
       } else if (param.nodeId) {
-        this.navigationBarService.getItem(param.nodeId).subscribe(node => this.node = node);
+        this.navigationBarService.getNodeByNodeId(param.nodeId).subscribe(node => this.node = node);
       }
     });
   }
 
-  uploadFile(event: any, upload: any) {
-    upload._disabled = true;
-    this.navigationBarService.uploadFile(event.target.files[0]).subscribe(e => {
-      this.node.content.content = e;
-      upload._disabled = false;
-    });
-  }
+  // uploadFile(event: any, upload: any) {
+  //   upload._disabled = true;
+  //   this.navigationBarService.uploadFile(event.target.files[0]).subscribe(e => {
+  //     // this.node.content.content = e;
+  //     upload._disabled = false;
+  //   });
+  // }
 
   save() {
     this.navigationBarService.saveNode(this.node).subscribe(e => {
@@ -47,11 +47,11 @@ export class AddNodeComponent implements OnInit {
     this.location.back();
   }
 
-  removeContent(upload: any) {
-    upload._disabled = true;
-    this.navigationBarService.deleteFile(this.node.content.content).subscribe(e => {
-      this.node.content.content = '';
-      upload._disabled = false;
-    });
-  }
+  // removeContent(upload: any) {
+  //   upload._disabled = true;
+  //   this.navigationBarService.deleteFile(this.node.content.content).subscribe(e => {
+  //     // this.node.content.content = '';
+  //     upload._disabled = false;
+  //   });
+  // }
 }

@@ -1,0 +1,5 @@
+<div *ngIf="content && content.contentType">
+  <app-flash-viewer [(content)]="content" *ngIf="content.contentType == 'FLESH'"></app-flash-viewer>
+  <app-pdf-viewer [(content)]="content" *ngIf="content.contentType == 'PDF'"></app-pdf-viewer>
+  <app-html-viewer [(content)]="content" *ngIf="content.contentType == 'HTML'"></app-html-viewer>
+</div>

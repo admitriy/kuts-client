@@ -33,6 +33,7 @@ export class NavigationBarComponent implements OnInit {
     FLESH: 'flesh-viewer',
     HTML: 'html-viewer'
   };
+
   hasChild = (_: number, node: GetNavigationBarItemsResponse) => !!node.children && node.children.length > 0;
 
   getNavigationBarItems() {
@@ -61,11 +62,12 @@ export class NavigationBarComponent implements OnInit {
     if (rootRout === 'panel') { //TODO
       this.router.navigate(['/panel/node', this.selectedNode.id]);
     } else {
-      const content = this.selectedNode.content;
-      if ((!content.content) || (!content.contentType)) {
-        return;
-      }
-      this.router.navigate(['/' + this.fileFormats[content.contentType], this.selectedNode.id]);
+      // const content = this.selectedNode.content;
+      // if ((!content.content) || (!content.contentType)) {
+      //   return;
+      // }
+      // this.router.navigate(['/' + this.fileFormats[content.contentType], this.selectedNode.id]);
+      this.router.navigate(['/content', this.selectedNode.id]);
     }
   }
 }

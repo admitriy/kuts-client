@@ -1,0 +1,29 @@
+<form name="editForm" role="form" novalidate #editForm="ngForm"
+      (ngSubmit)="save()" xmlns="http://www.w3.org/1999/html">
+  <div class="admin-panel">
+    <mat-form-field class="admin-element">
+      <input matInput placeholder="Заголовок" [(ngModel)]="content.header" name="header" required>
+    </mat-form-field>
+
+    <mat-form-field class="admin-element" >
+      <mat-select placeholder="Выберите тип контента" [(ngModel)]="content.contentType" name="contentType" required>
+        <mat-option value="PDF">PDF</mat-option>
+        <mat-option value="FLESH">FLESH</mat-option>
+        <mat-option value="HTML">HTML</mat-option>
+        <mat-option value="TEXT">TEXT</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <input type="text" hidden="true" [(ngModel)]="content.content" name="content" required>
+
+    <input #file type="file" hidden="true" (change)="uploadFile($event, upload);">
+    <button type = "button" class="admin-element" mat-raised-button #upload
+      (click)="content.content ? removeContent(upload) : file.click();"
+      color="{{content.content ? 'accent' : 'basic'}}">
+      {{content.content ? 'Удалить контент' : 'Загрузить контент'}}
+    </button>
+
+    <button class="admin-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>
+    <button type = "button" (click)="back()" class="admin-element" mat-raised-button>Назад</button>
+  </div>
+</form>
