@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {NavigationBarItemContent} from './response/content/navigation-bar-item-content';
+import {ItemNodeTest} from './response/test/item-node-test';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class NavigationBarService {
     return this.http.get<GetNavigationBarItemsResponse>(this.baseUrl + 'node/' + id);
   }
 
+  getTest(id: string) {
+    return this.http.get<ItemNodeTest>(this.baseUrl + 'test/' + id);
+  }
+
   getContentByNodeId(id: string) {
     return this.http.get<NavigationBarItemContent>(this.baseUrl + 'content/' + id);
   }
@@ -34,6 +39,10 @@ export class NavigationBarService {
 
   saveContent(content: NavigationBarItemContent) {
     return this.http.post<NavigationBarItemContent>(this.baseUrl + 'content/', content);
+  }
+
+  saveTest(test: ItemNodeTest) {
+    return this.http.post<ItemNodeTest>(this.baseUrl + 'test/', test);
   }
 
   updateNode(node: GetNavigationBarItemsResponse) {

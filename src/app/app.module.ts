@@ -25,6 +25,8 @@ import {ContentComponent} from './content/content.component';
 import {ContentRoute} from './content/content.route';
 import {AddContentComponent} from './admin/add-content/add-content.component';
 import {AddContentRoute} from './admin/add-content/add-content.route';
+import {AddTestComponent} from './admin/add-test/add-test.component';
+import {AddTestRoute} from './admin/add-test/add-test.route';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import {AddContentRoute} from './admin/add-content/add-content.route';
     AddNodeComponent,
     HtmlViewerComponent,
     ContentComponent,
-    AddContentComponent
+    AddContentComponent,
+    AddTestComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import {AddContentRoute} from './admin/add-content/add-content.route';
       ...AddNodeRoute,
       HtmlViewerRoute,
       ContentRoute,
-      AddContentRoute]) //TODO
+      AddContentRoute,
+      AddTestRoute]) //TODO
   ],
   providers: [],
   bootstrap: [AppComponent]

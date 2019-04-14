@@ -1,0 +1,44 @@
+<form name="editForm" role="form" novalidate #editForm="ngForm"
+      (ngSubmit)="save()" xmlns="http://www.w3.org/1999/html" class="test-form">
+  <div class="test-panel">
+    <mat-form-field class="test-element">
+      <input matInput placeholder="Название теста" [(ngModel)]="test.testName" name="testName">
+    </mat-form-field>
+
+
+    <!--<mat-list *ngFor="let question of test.questions">-->
+      <!--<mat-list-item>{{question.questionName}}</mat-list-item>-->
+      <!--<mat-divider></mat-divider>-->
+    <!--</mat-list>-->
+
+
+    <div *ngFor="let question of test.questions; let questionIndex = index;" class="test-element question">
+
+      <mat-form-field class="question__name">
+        <input matInput placeholder="Вопрос" [(ngModel)]="question.questionName" name="question.{{questionIndex}}.questionName">
+      </mat-form-field>
+
+      <div class="choice">
+
+        <div *ngFor="let choice of question.choices; let choiceIndex = index;" class="choice__block">
+          <mat-form-field class="choice__input">
+            <input matInput placeholder="Вариант ответа" [(ngModel)]="choice.choiceName" name="choice.{{choiceIndex}}.choiceName">
+          </mat-form-field>
+          <mat-checkbox [(ngModel)]="choice.correct" name="choice.{{choiceIndex}}.correct"></mat-checkbox>
+          <button type = "button" mat-icon-button (click)="removeChoice(questionIndex, choiceIndex);">
+            <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+          </button>
+        </div>
+
+        <button type = "button" (click)="addChoice(question)" class="choice__add-button" color="primary" mat-stroked-button>Добавить вариант</button>
+        <button type = "button" (click)="removeQuestion(questionIndex)" class="choice__add-button" color="accent" mat-stroked-button>Удалить вопрос</button>
+      </div>
+
+    </div>
+
+    <button type = "button" (click)="addQuestion()" class="test-element" color="primary" mat-stroked-button>Добавить вопрос</button>
+
+    <button class="test-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>
+    <button type = "button" (click)="back()" class="test-element" mat-raised-button>Назад</button>
+  </div>
+</form>
