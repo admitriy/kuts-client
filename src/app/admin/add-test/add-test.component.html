@@ -22,7 +22,7 @@
 
         <div *ngFor="let choice of question.choices; let choiceIndex = index;" class="choice__block">
           <mat-form-field class="choice__input">
-            <input matInput placeholder="Вариант ответа" [(ngModel)]="choice.choiceName" name="choice.{{choiceIndex}}.choiceName">
+            <input matInput placeholder="Вариант ответа" [(ngModel)]="choice.choiceName" name="question.{{questionIndex}}.choices.{{choiceIndex}}.choiceName">
           </mat-form-field>
           <mat-checkbox [(ngModel)]="choice.correct" name="choice.{{choiceIndex}}.correct"></mat-checkbox>
           <button type = "button" mat-icon-button (click)="removeChoice(questionIndex, choiceIndex);">
