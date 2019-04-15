@@ -10,7 +10,7 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 })
 export class PdfViewerComponent implements OnInit {
   pdfLink;
-  link = 'http://18.222.201.152/api/1/file/'; //TODO
+  link = 'http://18.222.201.152:8084/api/1/file/'; //TODO
   @Input() content: NavigationBarItemContent;
 
   constructor(
