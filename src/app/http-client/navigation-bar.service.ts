@@ -15,7 +15,7 @@ export class NavigationBarService {
   ) {
   }
 
-  private baseUrl: string = 'http://localhost:8084/api/1/';
+  private baseUrl: string = 'http://18.222.201.152:8084/api/1/';
 
   getItems() {
     return this.http.get<GetNavigationBarItemsResponse[]>(this.baseUrl + 'node/findAll');

@@ -29,7 +29,7 @@ export class AddTestComponent implements OnInit {
           if (test) {
             this.test = test;
           } else {
-            this.test.node = {} as ItemNodeTest;
+            this.test.node = {} as GetNavigationBarItemsResponse;
             this.test.node.id = param.nodeId;
           }
         });
@@ -56,7 +56,7 @@ export class AddTestComponent implements OnInit {
 
   addChoice(question: ItemQuestion) {
     if (!question.choices) {
-      question.choices = [] as ItemQuestion[];
+      question.choices = [] as ItemChoice[];
     }
     question.choices.push({} as ItemChoice);
   }

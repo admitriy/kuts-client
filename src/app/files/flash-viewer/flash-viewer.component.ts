@@ -12,7 +12,7 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 export class FlashViewerComponent implements OnInit {
   objectSwf;
   flashLink;
-  link = 'http://localhost:8084/api/1/file/'; //TODO
+  link = 'http://18.222.201.152:8084/api/1/file/'; //TODO
   @Input() content: NavigationBarItemContent;
 
   @ViewChild('swfDiv') swfDiv;

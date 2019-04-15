@@ -12,7 +12,7 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 export class HtmlViewerComponent implements OnInit {
   objecthtml;
   htmlLink;
-  link = 'http://localhost:8084/api/1/file/';
+  link = 'http://18.222.201.152:8084/api/1/file/';
   @Input() content: NavigationBarItemContent;
 
   @ViewChild('htmlDiv') swfDiv;
