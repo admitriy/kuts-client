@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {DomSanitizer} from '@angular/platform-browser';
-import {NavigationBarService} from '../http-client/navigation-bar.service';
+import {NavigationBarService} from '../../http-client/navigation-bar.service';
 import {ActivatedRoute} from '@angular/router';
-import {NavigationBarItemContent} from '../http-client/response/content/navigation-bar-item-content';
+import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
 
 @Component({
   selector: 'app-content',

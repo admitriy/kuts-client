@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, ViewChild, SecurityContext} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavigationBarService } from '../../http-client/navigation-bar.service';
+import { NavigationBarService } from '../../../http-client/navigation-bar.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
+import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
 
 @Component({
   selector: 'app-flash-viewer',

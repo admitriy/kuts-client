@@ -10,36 +10,40 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { PdfViewerComponent } from './files/pdf-viewer/pdf-viewer.component';
-import { FlashViewerComponent } from './files/flash-viewer/flash-viewer.component';
+import { PdfViewerComponent } from './main/files/pdf-viewer/pdf-viewer.component';
+import { FlashViewerComponent } from './main/files/flash-viewer/flash-viewer.component';
 import { RouterModule } from '@angular/router';
-import { PdfViewerRoute } from './files/pdf-viewer/pdf-viewer.route';
-import { FlashViewerRoute } from './files/flash-viewer/flash-viewer.route';
+import { PdfViewerRoute } from './main/files/pdf-viewer/pdf-viewer.route';
+import { FlashViewerRoute } from './main/files/flash-viewer/flash-viewer.route';
 import {AdminPanelRoute} from './admin/panel/admin-panel.route';
 import {AdminPanelComponent} from './admin/panel/admin-panel.component';
 import {AddNodeComponent} from './admin/add-node/add-node.component';
 import {AddNodeRoute} from './admin/add-node/add-node.route';
-import {HtmlViewerComponent} from './files/html-viewer/html-viewer.component';
-import {HtmlViewerRoute} from './files/html-viewer/html-viewer.route';
-import {ContentComponent} from './content/content.component';
-import {ContentRoute} from './content/content.route';
+import {HtmlViewerComponent} from './main/files/html-viewer/html-viewer.component';
+import {HtmlViewerRoute} from './main/files/html-viewer/html-viewer.route';
+import {ContentComponent} from './main/content/content.component';
+import {ContentRoute} from './main/content/content.route';
 import {AddContentComponent} from './admin/add-content/add-content.component';
 import {AddContentRoute} from './admin/add-content/add-content.route';
 import {AddTestComponent} from './admin/add-test/add-test.component';
 import {AddTestRoute} from './admin/add-test/add-test.route';
+import {HeaderMainComponent} from './header-main/header-main.component';
+import {MainModule} from './main/main.module';
+import {MainRoute} from './main/main.route';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavigationBarComponent,
-    PdfViewerComponent,
-    FlashViewerComponent,
-    AdminPanelComponent,
-    AddNodeComponent,
-    HtmlViewerComponent,
-    ContentComponent,
-    AddContentComponent,
-    AddTestComponent
+    // AppComponent,
+    // NavigationBarComponent,
+    // PdfViewerComponent,
+    // FlashViewerComponent,
+    // AdminPanelComponent,
+    // AddNodeComponent,
+    // HtmlViewerComponent,
+    // ContentComponent,
+    // AddContentComponent,
+    // AddTestComponent,
+    // HeaderMainComponent
   ],
   imports: [
     BrowserModule,
@@ -51,16 +55,20 @@ import {AddTestRoute} from './admin/add-test/add-test.route';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    PdfViewerModule,
+    // PdfViewerModule,
+    // RouterModule.forRoot([
+    //   PdfViewerRoute,
+    //   FlashViewerRoute,
+    //   ...AdminPanelRoute,
+    //   ...AddNodeRoute,
+    //   HtmlViewerRoute,
+    //   ContentRoute,
+    //   AddContentRoute,
+    //   AddTestRoute]) //TODO
     RouterModule.forRoot([
-      PdfViewerRoute,
-      FlashViewerRoute,
-      ...AdminPanelRoute,
-      ...AddNodeRoute,
-      HtmlViewerRoute,
-      ContentRoute,
-      AddContentRoute,
-      AddTestRoute]) //TODO
+      ...MainRoute
+    ]),
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

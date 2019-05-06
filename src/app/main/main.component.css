@@ -1,0 +1,23 @@
+@font-face {
+  font-family: Museo-1;
+  src: url("../../assets/font/MuseoSansCyrl_1.otf") format("opentype");
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  height: 800px;
+  overflow: auto;
+}
+
+.menu {
+  float: left;
+  display: inline;
+  width: 300px;
+  border: 2px solid #e1e1e1;
+}
+
+.wrapper {
+  width: 1280px;
+  margin: 0 auto;
+}

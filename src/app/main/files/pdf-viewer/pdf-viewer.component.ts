@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavigationBarService } from '../../http-client/navigation-bar.service';
-import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
+import { NavigationBarService } from '../../../http-client/navigation-bar.service';
+import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
 
 @Component({
   selector: 'app-pdf-viewer',
