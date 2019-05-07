@@ -6,6 +6,5 @@ export const ContentRoute: Route = {
   component: ContentComponent,
   data: {
     pageTitle: 'Просмотр content'
-  },
-  outlet: 'testKek'
+  }
 };

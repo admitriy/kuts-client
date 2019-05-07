@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
 import {NavigationBarService} from '../../http-client/navigation-bar.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
 
 @Component({
@@ -11,17 +10,24 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 })
 export class ContentComponent implements OnInit {
   content: NavigationBarItemContent;
+  currentNode: any;
 
   constructor(
     private routeSub: ActivatedRoute,
-    private navigationBarService: NavigationBarService) {
+    private navigationBarService: NavigationBarService,
+    private router: Router) {
   }
 
   ngOnInit() {
     this.routeSub.params.subscribe((param) => {
       this.navigationBarService.getContentByNodeId(param.nodeId).subscribe(content => {
         this.content = content;
+        this.currentNode = param.nodeId;
       });
     });
+  }
+
+  navigateToTest() {
+    this.router.navigate(['/test', this.currentNode]);
   }
 }

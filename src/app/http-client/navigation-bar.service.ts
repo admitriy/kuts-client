@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {NavigationBarItemContent} from './response/content/navigation-bar-item-content';
 import {ItemNodeTest} from './response/test/item-node-test';
+import {ItemTestValidate} from './response/test/item-test-validate';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,14 @@ export class NavigationBarService {
 
   getTest(id: string) {
     return this.http.get<ItemNodeTest>(this.baseUrl + 'test/' + id);
+  }
+
+  getPassTest(id: string) {
+    return this.http.get<ItemNodeTest>(this.baseUrl + 'test/' + id + '/start');
+  }
+
+  validateTest(id: string, test: ItemNodeTest) {
+    return this.http.post<ItemTestValidate>(this.baseUrl + 'test/' + id + '/validate', test);
   }
 
   getContentByNodeId(id: string) {

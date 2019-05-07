@@ -28,22 +28,23 @@ import {AddContentRoute} from './admin/add-content/add-content.route';
 import {AddTestComponent} from './admin/add-test/add-test.component';
 import {AddTestRoute} from './admin/add-test/add-test.route';
 import {HeaderMainComponent} from './header-main/header-main.component';
-import {MainModule} from './main/main.module';
-import {MainRoute} from './main/main.route';
+import {PassTestComponent} from './main/pass-test/pass-test.component';
+import {PassTestRoute} from './main/pass-test/pass-test.route';
 
 @NgModule({
   declarations: [
-    // AppComponent,
-    // NavigationBarComponent,
-    // PdfViewerComponent,
-    // FlashViewerComponent,
-    // AdminPanelComponent,
-    // AddNodeComponent,
-    // HtmlViewerComponent,
-    // ContentComponent,
-    // AddContentComponent,
-    // AddTestComponent,
-    // HeaderMainComponent
+    AppComponent,
+    NavigationBarComponent,
+    PdfViewerComponent,
+    FlashViewerComponent,
+    AdminPanelComponent,
+    AddNodeComponent,
+    HtmlViewerComponent,
+    ContentComponent,
+    AddContentComponent,
+    AddTestComponent,
+    HeaderMainComponent,
+    PassTestComponent
   ],
   imports: [
     BrowserModule,
@@ -55,20 +56,21 @@ import {MainRoute} from './main/main.route';
     DemoMaterialModule,
     MatNativeDateModule,
     ReactiveFormsModule,
-    // PdfViewerModule,
-    // RouterModule.forRoot([
-    //   PdfViewerRoute,
-    //   FlashViewerRoute,
-    //   ...AdminPanelRoute,
-    //   ...AddNodeRoute,
-    //   HtmlViewerRoute,
-    //   ContentRoute,
-    //   AddContentRoute,
-    //   AddTestRoute]) //TODO
+    PdfViewerModule,
     RouterModule.forRoot([
-      ...MainRoute
-    ]),
-    MainModule
+      PdfViewerRoute,
+      FlashViewerRoute,
+      ...AdminPanelRoute,
+      ...AddNodeRoute,
+      HtmlViewerRoute,
+      ContentRoute,
+      AddContentRoute,
+      AddTestRoute,
+      PassTestRoute]) //TODO
+    // RouterModule.forRoot([
+    //   ...MainRoute
+    // ]),
+    // MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

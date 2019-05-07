@@ -1,0 +1,49 @@
+@font-face {
+  font-family: Museo-0;
+  src: url("../../../assets/font/MuseoSansCyrl_0.otf") format("opentype");
+}
+
+.test {
+  width: 700px;
+  padding: 20px;
+}
+
+.test-elem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.test-header {
+  font-size: 30px;
+  font-weight: 400;
+  text-decoration: none;
+  padding-top: 2px;
+  font-family: 'Museo-0';
+}
+
+.test-question-name {
+  font-size: 20px;
+}
+
+.test-question-number {
+  margin-top: 0px;
+}
+
+.test-question-block {
+  border: 2px solid #909090;
+  padding: 20px 50px;
+}
+
+.test-pass-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.test-pass-buttons__button {
+  min-width: 250px;
+}
