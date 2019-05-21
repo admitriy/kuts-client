@@ -20,6 +20,7 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
     this.routeSub.params.subscribe((param) => {
+      this.content = null;
       this.navigationBarService.getContentByNodeId(param.nodeId).subscribe(content => {
         this.content = content;
         this.currentNode = param.nodeId;

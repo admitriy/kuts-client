@@ -47,3 +47,8 @@
 .test-pass-buttons__button {
   min-width: 250px;
 }
+
+.test-choice {
+  height: initial !important;
+  margin-bottom: 7px !important;
+}

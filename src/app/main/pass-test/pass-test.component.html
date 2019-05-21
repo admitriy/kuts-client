@@ -5,7 +5,7 @@
     <p class="test-elem test-header test-question-name test-question-number">Вопрос {{currentQuestion+1}} из {{test.questions.length}}.</p>
     <p class="test-elem test-header test-question-name">{{test.questions[currentQuestion].questionName}}</p>
     <mat-selection-list #shoes>
-      <mat-list-option *ngFor="let choice of test.questions[currentQuestion].choices" (click)="selectedChoice(choice)">
+      <mat-list-option class="test-choice" *ngFor="let choice of test.questions[currentQuestion].choices" (click)="selectedChoice(choice)">
         {{choice.choiceName}}
       </mat-list-option>
     </mat-selection-list>
