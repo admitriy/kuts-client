@@ -8,6 +8,10 @@ import {HtmlViewerRoute} from './files/html-viewer/html-viewer.route';
 import {AddTestRoute} from '../admin/add-test/add-test.route';
 import {AdminPanelRoute} from '../admin/panel/admin-panel.route';
 import {AddContentRoute} from '../admin/add-content/add-content.route';
+import {GroupListRoute} from '../admin/group-list/group-list.route';
+import {AddGroupRoute} from '../admin/add-group/add-group.route';
+import {UserListRoute} from '../admin/user-list/user-list.route';
+import {TestResultRoute} from '../admin/test-result/test-result.route';
 
 export const MainRoute: Routes = [
   {
@@ -22,7 +26,11 @@ export const MainRoute: Routes = [
       HtmlViewerRoute,
       ContentRoute,
       AddContentRoute,
-      AddTestRoute
+      AddTestRoute,
+      GroupListRoute,
+      AddGroupRoute,
+      UserListRoute,
+      TestResultRoute
     ]
   }
 ];

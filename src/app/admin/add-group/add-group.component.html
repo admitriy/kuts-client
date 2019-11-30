@@ -2,7 +2,7 @@
       (ngSubmit)="save()" xmlns="http://www.w3.org/1999/html">
   <div class="admin-panel">
     <mat-form-field class="admin-element">
-      <input matInput placeholder="Название" [(ngModel)]="node.fullName" name="fullName" required>
+      <input matInput placeholder="Название группы" [(ngModel)]="group.name" name="name" required>
     </mat-form-field>
 
     <button class="admin-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>

@@ -1,25 +1,13 @@
 <div class="wrapper">
-  <!--<header class="header">-->
-    <!--<div class="header-wrapper">-->
-        <!--<div class="header__menu">-->
-          <!--<div class="header__block">-->
-            <!--<div class="logo" routerLink="/">-->
-              <!--<img class="logo__img" src="../assets/img/MIREA_Gerb_Colour.png"/>-->
-            <!--</div>-->
-          <!--</div>-->
-          <!--<div class="header__block">-->
-            <!--<p class="header__text">МИРЭА - Российский технологический университет</p>-->
-          <!--</div>-->
-          <!--<div class="header__block">-->
-            <!--<div class="logo" routerLink="/panel/node">-->
-              <!--<img class="logo__img" src="../assets/img/Znak_kafedra.jpg"/>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-  <!--</header>-->
-
   <app-header-main></app-header-main>
+
+  <button *ngIf="isAuthorized" mat-button [matMenuTriggerFor]="menu">Меню</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/">Контент</button>
+    <button mat-menu-item routerLink="/panel/node">Редактирование контента</button>
+    <button mat-menu-item routerLink="/panel/group-list">Группы</button>
+    <button mat-menu-item>Выйти</button>
+  </mat-menu>
 
   <div *ngIf="isAuthorized">
     <app-navigation-bar class="menu"></app-navigation-bar>

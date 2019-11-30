@@ -41,8 +41,6 @@ export class PassTestComponent implements OnInit {
   }
 
   nextQuestion() {
-    console.log(this.currentQuestion);
-    console.log(this.test.questions.length - 1);
     if (this.currentQuestion === (this.test.questions.length - 1)) {
       this.navigationBarService.validateTest(this.nodeId, this.test).subscribe(e => {
         this.result = e;

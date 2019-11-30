@@ -31,6 +31,14 @@ import {HeaderMainComponent} from './header-main/header-main.component';
 import {PassTestComponent} from './main/pass-test/pass-test.component';
 import {PassTestRoute} from './main/pass-test/pass-test.route';
 import {CookieService} from "ngx-cookie-service";
+import {GroupListComponent} from './admin/group-list/group-list.component';
+import {GroupListRoute} from './admin/group-list/group-list.route';
+import {AddGroupComponent} from './admin/add-group/add-group.component';
+import {AddGroupRoute} from './admin/add-group/add-group.route';
+import {UserListComponent} from './admin/user-list/user-list.component';
+import {UserListRoute} from './admin/user-list/user-list.route';
+import {TestResultComponent} from './admin/test-result/test-result.component';
+import {TestResultRoute} from './admin/test-result/test-result.route';
 
 @NgModule({
   declarations: [
@@ -45,7 +53,11 @@ import {CookieService} from "ngx-cookie-service";
     AddContentComponent,
     AddTestComponent,
     HeaderMainComponent,
-    PassTestComponent
+    PassTestComponent,
+    GroupListComponent,
+    AddGroupComponent,
+    UserListComponent,
+    TestResultComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +79,11 @@ import {CookieService} from "ngx-cookie-service";
       ContentRoute,
       AddContentRoute,
       AddTestRoute,
-      PassTestRoute]) //TODO
+      PassTestRoute,
+      GroupListRoute,
+      AddGroupRoute,
+      UserListRoute,
+      TestResultRoute]) //TODO
     // RouterModule.forRoot([
     //   ...MainRoute
     // ]),

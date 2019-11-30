@@ -11,6 +11,8 @@ import {Auth} from "./response/auth/auth";
 import {Register} from "./response/auth/register";
 import {Token} from "./response/auth/token";
 import {CookieService} from "ngx-cookie-service";
+import {User} from './response/auth/user';
+import {TestResult} from './response/test/test-result';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +25,6 @@ export class NavigationBarService {
   ) {
   }
 
-  private baseUrl: string = 'http://localhost:8084/api/1/';
-
   getItems() {
     return this.http.get<GetNavigationBarItemsResponse[]>(AppSettings.API + 'node/findAll', this.getAuthourisationHeader());
   }
@@ -35,15 +35,26 @@ export class NavigationBarService {
 
   getTest(id: string) {
     return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id, this.getAuthourisationHeader());
-    return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id);
+  }
+
+  getGroup(id: string) {
+    return this.http.get<Group>(AppSettings.API + 'group/' + id, this.getAuthourisationHeader());
+  }
+
+  getUsersByGroupId(id: string) {
+    return this.http.get<User[]>(AppSettings.API + 'user/group/' + id, this.getAuthourisationHeader());
+  }
+
+  getTestResultByUserID(id: string) {
+    return this.http.get<TestResult[]>(AppSettings.API + 'test/testResult/' + id, this.getAuthourisationHeader());
   }
 
   getPassTest(id: string) {
-    return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id + '/start');
+    return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id + '/start', this.getAuthourisationHeader());
   }
 
   validateTest(id: string, test: ItemNodeTest) {
-    return this.http.post<ItemTestValidate>(AppSettings.API + 'test/' + id + '/validate', test);
+    return this.http.post<ItemTestValidate>(AppSettings.API + 'test/' + id + '/validate', test, this.getAuthourisationHeader());
   }
 
   getContentByNodeId(id: string) {
@@ -52,6 +63,10 @@ export class NavigationBarService {
 
   saveNode(node: GetNavigationBarItemsResponse) {
     return this.http.post<GetNavigationBarItemsResponse>(AppSettings.API + 'node/', node, this.getAuthourisationHeader());
+  }
+
+  saveGroup(group: Group) {
+    return this.http.post<Group>(AppSettings.API + 'group/', group, this.getAuthourisationHeader());
   }
 
   saveContent(content: NavigationBarItemContent) {
@@ -73,25 +88,29 @@ export class NavigationBarService {
   uploadFile(file: any) {
     const formData = new FormData();
     formData.append('file', file);
-    const headers = new HttpHeaders({'enctype': 'multipart/form-data'});
+    const headers = new HttpHeaders({'enctype': 'multipart/form-data', 'Authorization': this.cookieService.get("kuts-token")});
 
     return this.http.post<string>(AppSettings.API + 'file/', formData, {headers: headers});
   }
 
   deleteFile(fileId: any) {
-    return this.http.delete(this.baseUrl + 'file/' + fileId, this.getAuthourisationHeader());
+    return this.http.delete(AppSettings.API + 'file/' + fileId, this.getAuthourisationHeader());
+  }
+
+  deleteGroup(groupId: any) {
+    return this.http.delete(AppSettings.API + 'group/' + groupId, this.getAuthourisationHeader());
   }
 
   getAllGroups() {
-    return this.http.get<Group[]>(this.baseUrl + 'group/list');
+    return this.http.get<Group[]>(AppSettings.API + 'group/list');
   }
 
   authorization(auth: Auth) {
-    return this.http.post<Token>(this.baseUrl + 'user/auth', auth);
+    return this.http.post<Token>(AppSettings.API + 'user/auth', auth);
   }
 
   registration(register: Register) {
-    return this.http.post<Token>(this.baseUrl + 'user/register', register);
+    return this.http.post<Token>(AppSettings.API + 'user/register', register);
   }
 
   getAuthourisationHeader() {

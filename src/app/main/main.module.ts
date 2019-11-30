@@ -31,6 +31,14 @@ import {AddNodeRoute} from '../admin/add-node/add-node.route';
 import {AdminPanelRoute} from '../admin/panel/admin-panel.route';
 import {FlashViewerRoute} from './files/flash-viewer/flash-viewer.route';
 import {PdfViewerRoute} from './files/pdf-viewer/pdf-viewer.route';
+import {GroupListComponent} from '../admin/group-list/group-list.component';
+import {GroupListRoute} from '../admin/group-list/group-list.route';
+import {AddGroupComponent} from '../admin/add-group/add-group.component';
+import {AddGroupRoute} from '../admin/add-group/add-group.route';
+import {UserListComponent} from '../admin/user-list/user-list.component';
+import {UserListRoute} from '../admin/user-list/user-list.route';
+import {TestResultComponent} from '../admin/test-result/test-result.component';
+import {TestResultRoute} from '../admin/test-result/test-result.route';
 
 @NgModule({
   imports: [
@@ -52,7 +60,11 @@ import {PdfViewerRoute} from './files/pdf-viewer/pdf-viewer.route';
       HtmlViewerRoute,
       ContentRoute,
       AddContentRoute,
-      AddTestRoute
+      AddTestRoute,
+      GroupListRoute,
+      AddGroupRoute,
+      UserListRoute,
+      TestResultRoute
     ])
   ],
   declarations: [
@@ -67,7 +79,11 @@ import {PdfViewerRoute} from './files/pdf-viewer/pdf-viewer.route';
     AddContentComponent,
     AddTestComponent,
     HeaderMainComponent,
-    MainComponent
+    MainComponent,
+    GroupListComponent,
+    AddGroupComponent,
+    UserListComponent,
+    TestResultComponent
   ],
   providers: [],
   exports: [],
