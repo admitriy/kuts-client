@@ -11,17 +11,63 @@
             <p class="header__text">МИРЭА - Российский технологический университет</p>
           </div>
           <div class="header__block">
-            <div class="logo" routerLink="/panel/node">
+            <div class="logo" routerLink="/panel/node" *ngIf="cookieService.get('kuts-role') === 'ADMIN'">
               <img class="logo__img" src="../assets/img/Znak_kafedra.jpg"/>
             </div>
+          <div class="logo" *ngIf="cookieService.get('kuts-role') !== 'ADMIN'">
+            <img class="logo__img" src="../assets/img/Znak_kafedra.jpg"/>
+          </div>
           </div>
         </div>
     </div>
   </header>
 
-  <app-navigation-bar class="menu"></app-navigation-bar>
+  <div *ngIf="isAuthorized">
+    <app-navigation-bar class="menu"></app-navigation-bar>
 
-  <div class="content">
-      <router-outlet></router-outlet>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div *ngIf="!isAuthorized" class="auth-tab">
+    <mat-tab-group>
+      <mat-tab label="Авторизация">
+        <form name="authForm" role="form" novalidate #authForm="ngForm"
+              (ngSubmit)="authorizarion()" xmlns="http://www.w3.org/1999/html">
+          <div class="auth_block">
+            <mat-form-field class="auth-input">
+              <input matInput placeholder="Логин" [(ngModel)]="auth.login" name="header" required>
+            </mat-form-field>
+            <mat-form-field class="auth-input">
+              <input matInput placeholder="Пароль" [(ngModel)]="auth.password" name="header" required>
+            </mat-form-field>
+            <button class="auth-input" mat-raised-button color="primary" [disabled]="!authForm.valid">Войти</button>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Регистрация">
+        <form name="editForm" role="form" novalidate #editForm="ngForm"
+              (ngSubmit)="registration()" xmlns="http://www.w3.org/1999/html">
+          <div class="auth_block">
+            <mat-form-field class="auth-input">
+              <input matInput placeholder="Логин" [(ngModel)]="register.login" name="header" required>
+            </mat-form-field>
+            <mat-form-field class="auth-input">
+              <input matInput placeholder="Пароль" [(ngModel)]="register.password" name="header" required>
+            </mat-form-field>
+            <mat-form-field class="auth-input">
+              <input matInput placeholder="ФИО" [(ngModel)]="register.name" name="header" required>
+            </mat-form-field>
+            <mat-form-field class="auth-input" >
+              <mat-select placeholder="Выберите группу" [(ngModel)]="register.group.id" name="contentType" required>
+                <mat-option *ngFor="let group of groups" [value]=group.id>{{group.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button class="auth-input" mat-raised-button color="primary" [disabled]="!editForm.valid">Регистрация</button>
+          </div>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
   </div>
 </div>

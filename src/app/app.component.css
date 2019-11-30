@@ -3,6 +3,25 @@
   src: url("../assets/font/MuseoSansCyrl_1.otf") format("opentype");
 }
 
+.auth-tab {
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  overflow: auto;
+}
+
+.auth_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.auth-input {
+  width: 100%;
+}
+
 .content {
   display: flex;
   justify-content: center;

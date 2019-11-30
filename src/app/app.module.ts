@@ -27,6 +27,7 @@ import {AddContentComponent} from './admin/add-content/add-content.component';
 import {AddContentRoute} from './admin/add-content/add-content.route';
 import {AddTestComponent} from './admin/add-test/add-test.component';
 import {AddTestRoute} from './admin/add-test/add-test.route';
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -62,7 +63,7 @@ import {AddTestRoute} from './admin/add-test/add-test.route';
       AddContentRoute,
       AddTestRoute]) //TODO
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

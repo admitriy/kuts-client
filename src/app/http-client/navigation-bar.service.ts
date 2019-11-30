@@ -4,6 +4,11 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {NavigationBarItemContent} from './response/content/navigation-bar-item-content';
 import {ItemNodeTest} from './response/test/item-node-test';
+import {Group} from "./response/auth/group";
+import {Auth} from "./response/auth/auth";
+import {Register} from "./response/auth/register";
+import {Token} from "./response/auth/token";
+import {CookieService} from "ngx-cookie-service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,26 +16,27 @@ import {ItemNodeTest} from './response/test/item-node-test';
 
 export class NavigationBarService {
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private cookieService: CookieService
   ) {
   }
 
-  private baseUrl: string = 'http://18.222.201.152:8084/api/1/';
+  private baseUrl: string = 'http://localhost:8084/api/1/';
 
   getItems() {
-    return this.http.get<GetNavigationBarItemsResponse[]>(this.baseUrl + 'node/findAll');
+    return this.http.get<GetNavigationBarItemsResponse[]>(this.baseUrl + 'node/findAll', this.getAuthourisationHeader());
   }
 
   getNodeByNodeId(id: string) {
-    return this.http.get<GetNavigationBarItemsResponse>(this.baseUrl + 'node/' + id);
+    return this.http.get<GetNavigationBarItemsResponse>(this.baseUrl + 'node/' + id, this.getAuthourisationHeader());
   }
 
   getTest(id: string) {
-    return this.http.get<ItemNodeTest>(this.baseUrl + 'test/' + id);
+    return this.http.get<ItemNodeTest>(this.baseUrl + 'test/' + id, this.getAuthourisationHeader());
   }
 
   getContentByNodeId(id: string) {
-    return this.http.get<NavigationBarItemContent>(this.baseUrl + 'content/' + id);
+    return this.http.get<NavigationBarItemContent>(this.baseUrl + 'content/' + id, this.getAuthourisationHeader());
   }
 
   saveNode(node: GetNavigationBarItemsResponse) {
@@ -64,5 +70,20 @@ export class NavigationBarService {
   deleteFile(fileId: any) {
     return this.http.delete(this.baseUrl + 'file/' + fileId);
   }
-}
 
+  getAllGroups() {
+    return this.http.get<Group[]>(this.baseUrl + 'group/list');
+  }
+
+  authorization(auth: Auth) {
+    return this.http.post<Token>(this.baseUrl + 'user/auth', auth);
+  }
+
+  registration(register: Register) {
+    return this.http.post<Token>(this.baseUrl + 'user/register', register);
+  }
+
+  getAuthourisationHeader() {
+    return {headers: new HttpHeaders({'Authorization': this.cookieService.get("kuts-token")})};
+  }
+}

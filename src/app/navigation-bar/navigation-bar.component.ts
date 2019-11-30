@@ -5,6 +5,7 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
 import { NavigationBarService } from '../http-client/navigation-bar.service';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {Router} from '@angular/router';
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
   selector: 'app-navigation-bar',
@@ -59,14 +60,9 @@ export class NavigationBarComponent implements OnInit {
     this.currentTarget.style.textDecoration = 'underline';
     const rootRout = this.router.url.split('/')[1];
     this.selectedNode = node;
-    if (rootRout === 'panel') { //TODO
+    if (rootRout === 'panel') {
       this.router.navigate(['/panel/node', this.selectedNode.id]);
     } else {
-      // const content = this.selectedNode.content;
-      // if ((!content.content) || (!content.contentType)) {
-      //   return;
-      // }
-      // this.router.navigate(['/' + this.fileFormats[content.contentType], this.selectedNode.id]);
       this.router.navigate(['/content', this.selectedNode.id]);
     }
   }
