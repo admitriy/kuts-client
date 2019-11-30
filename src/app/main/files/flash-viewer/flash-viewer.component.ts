@@ -1,8 +1,9 @@
 import {Component, OnInit, Input, ViewChild, SecurityContext} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavigationBarService } from '../../http-client/navigation-bar.service';
+import { NavigationBarService } from '../../../http-client/navigation-bar.service';
 import {DomSanitizer} from '@angular/platform-browser';
-import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
+import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
+import {AppSettings} from '../../../constants/AppSettings';
 
 @Component({
   selector: 'app-flash-viewer',
@@ -12,7 +13,7 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 export class FlashViewerComponent implements OnInit {
   objectSwf;
   flashLink;
-  link = 'http://18.222.201.152:8084/api/1/file/'; //TODO
+  link = AppSettings.API + 'file/';
   @Input() content: NavigationBarItemContent;
 
   @ViewChild('swfDiv') swfDiv;

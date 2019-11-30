@@ -4,6 +4,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {NavigationBarItemContent} from './response/content/navigation-bar-item-content';
 import {ItemNodeTest} from './response/test/item-node-test';
+import {ItemTestValidate} from './response/test/item-test-validate';
+import {AppSettings} from '../constants/AppSettings';
 import {Group} from "./response/auth/group";
 import {Auth} from "./response/auth/auth";
 import {Register} from "./response/auth/register";
@@ -24,39 +26,48 @@ export class NavigationBarService {
   private baseUrl: string = 'http://localhost:8084/api/1/';
 
   getItems() {
-    return this.http.get<GetNavigationBarItemsResponse[]>(this.baseUrl + 'node/findAll', this.getAuthourisationHeader());
+    return this.http.get<GetNavigationBarItemsResponse[]>(AppSettings.API + 'node/findAll', this.getAuthourisationHeader());
   }
 
   getNodeByNodeId(id: string) {
-    return this.http.get<GetNavigationBarItemsResponse>(this.baseUrl + 'node/' + id, this.getAuthourisationHeader());
+    return this.http.get<GetNavigationBarItemsResponse>(AppSettings.API + 'node/' + id, this.getAuthourisationHeader());
   }
 
   getTest(id: string) {
-    return this.http.get<ItemNodeTest>(this.baseUrl + 'test/' + id, this.getAuthourisationHeader());
+    return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id, this.getAuthourisationHeader());
+    return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id);
+  }
+
+  getPassTest(id: string) {
+    return this.http.get<ItemNodeTest>(AppSettings.API + 'test/' + id + '/start');
+  }
+
+  validateTest(id: string, test: ItemNodeTest) {
+    return this.http.post<ItemTestValidate>(AppSettings.API + 'test/' + id + '/validate', test);
   }
 
   getContentByNodeId(id: string) {
-    return this.http.get<NavigationBarItemContent>(this.baseUrl + 'content/' + id, this.getAuthourisationHeader());
+    return this.http.get<NavigationBarItemContent>(AppSettings.API + 'content/' + id, this.getAuthourisationHeader());
   }
 
   saveNode(node: GetNavigationBarItemsResponse) {
-    return this.http.post<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node, this.getAuthourisationHeader());
+    return this.http.post<GetNavigationBarItemsResponse>(AppSettings.API + 'node/', node, this.getAuthourisationHeader());
   }
 
   saveContent(content: NavigationBarItemContent) {
-    return this.http.post<NavigationBarItemContent>(this.baseUrl + 'content/', content, this.getAuthourisationHeader());
+    return this.http.post<NavigationBarItemContent>(AppSettings.API + 'content/', content, this.getAuthourisationHeader());
   }
 
   saveTest(test: ItemNodeTest) {
-    return this.http.post<ItemNodeTest>(this.baseUrl + 'test/', test, this.getAuthourisationHeader());
+    return this.http.post<ItemNodeTest>(AppSettings.API + 'test/', test, this.getAuthourisationHeader());
   }
 
   updateNode(node: GetNavigationBarItemsResponse) {
-    return this.http.put<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node, this.getAuthourisationHeader());
+    return this.http.put<GetNavigationBarItemsResponse>(AppSettings.API + 'node/', node, this.getAuthourisationHeader());
   }
 
   deleteNode(nodeId: any) {
-    return this.http.delete(this.baseUrl + 'node/' + nodeId, this.getAuthourisationHeader());
+    return this.http.delete(AppSettings.API + 'node/' + nodeId, this.getAuthourisationHeader());
   }
 
   uploadFile(file: any) {
@@ -64,7 +75,7 @@ export class NavigationBarService {
     formData.append('file', file);
     const headers = new HttpHeaders({'enctype': 'multipart/form-data'});
 
-    return this.http.post<string>(this.baseUrl + 'file/', formData, {headers: headers});
+    return this.http.post<string>(AppSettings.API + 'file/', formData, {headers: headers});
   }
 
   deleteFile(fileId: any) {

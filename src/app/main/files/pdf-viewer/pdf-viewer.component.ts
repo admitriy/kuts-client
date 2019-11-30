@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavigationBarService } from '../../http-client/navigation-bar.service';
-import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
+import { NavigationBarService } from '../../../http-client/navigation-bar.service';
+import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
+import {AppSettings} from '../../../constants/AppSettings';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -10,7 +11,7 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 })
 export class PdfViewerComponent implements OnInit {
   pdfLink;
-  link = 'http://18.222.201.152:8084/api/1/file/'; //TODO
+  link = AppSettings.API + 'file/';
   @Input() content: NavigationBarItemContent;
 
   constructor(

@@ -1,0 +1,31 @@
+<div class="test" *ngIf="test && test.questions && !result">
+  <p class="test-elem test-header">{{test.testName}}</p>
+
+  <div class="test-question-block" *ngIf="test.questions[currentQuestion]">
+    <p class="test-elem test-header test-question-name test-question-number">Вопрос {{currentQuestion+1}} из {{test.questions.length}}.</p>
+    <p class="test-elem test-header test-question-name">{{test.questions[currentQuestion].questionName}}</p>
+    <mat-selection-list #shoes>
+      <mat-list-option class="test-choice" *ngFor="let choice of test.questions[currentQuestion].choices" (click)="selectedChoice(choice)">
+        {{choice.choiceName}}
+      </mat-list-option>
+    </mat-selection-list>
+  </div>
+
+  <div class="test-pass-buttons">
+    <button type = "button" (click)="backToConent()" color="primary" class="test-pass-buttons__button" mat-stroked-button>Вернуться к контенту</button>
+    <button type = "button" (click)="nextQuestion()" color="accent" class="test-pass-buttons__button" mat-stroked-button>Ответить</button>
+  </div>
+
+  <!--Ваш результат: {{rightQuestions}} правильных ответов из {{test.questions.length}}.-->
+</div>
+
+<div class="test" *ngIf="result">
+  <p class="test-elem test-header">{{test.testName}}</p>
+  <p class="test-elem test-header test-question-name test-question-number">Ваш результат: {{rightQuestions}} правильных ответов из {{test.questions.length}}.</p>
+  <button type = "button" (click)="backToConent()" color="primary" class="test-elem" mat-stroked-button>Вернуться к контенту</button>
+</div>
+
+<div class="test" *ngIf="!test || !test.questions || (test.questions.length === 0)">
+  <p class="test-elem test-header">Теста нет</p>
+  <button type = "button" (click)="backToConent()" color="primary" class="test-elem" mat-stroked-button>Вернуться к контенту</button>
+</div>
