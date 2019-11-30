@@ -40,23 +40,23 @@ export class NavigationBarService {
   }
 
   saveNode(node: GetNavigationBarItemsResponse) {
-    return this.http.post<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node);
+    return this.http.post<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node, this.getAuthourisationHeader());
   }
 
   saveContent(content: NavigationBarItemContent) {
-    return this.http.post<NavigationBarItemContent>(this.baseUrl + 'content/', content);
+    return this.http.post<NavigationBarItemContent>(this.baseUrl + 'content/', content, this.getAuthourisationHeader());
   }
 
   saveTest(test: ItemNodeTest) {
-    return this.http.post<ItemNodeTest>(this.baseUrl + 'test/', test);
+    return this.http.post<ItemNodeTest>(this.baseUrl + 'test/', test, this.getAuthourisationHeader());
   }
 
   updateNode(node: GetNavigationBarItemsResponse) {
-    return this.http.put<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node);
+    return this.http.put<GetNavigationBarItemsResponse>(this.baseUrl + 'node/', node, this.getAuthourisationHeader());
   }
 
   deleteNode(nodeId: any) {
-    return this.http.delete(this.baseUrl + 'node/' + nodeId);
+    return this.http.delete(this.baseUrl + 'node/' + nodeId, this.getAuthourisationHeader());
   }
 
   uploadFile(file: any) {
@@ -68,7 +68,7 @@ export class NavigationBarService {
   }
 
   deleteFile(fileId: any) {
-    return this.http.delete(this.baseUrl + 'file/' + fileId);
+    return this.http.delete(this.baseUrl + 'file/' + fileId, this.getAuthourisationHeader());
   }
 
   getAllGroups() {
