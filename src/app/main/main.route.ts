@@ -12,6 +12,7 @@ import {GroupListRoute} from '../admin/group-list/group-list.route';
 import {AddGroupRoute} from '../admin/add-group/add-group.route';
 import {UserListRoute} from '../admin/user-list/user-list.route';
 import {TestResultRoute} from '../admin/test-result/test-result.route';
+import {Mp4ViewerRoute} from './files/mp4-viewer/mp4-viewer.route';
 
 export const MainRoute: Routes = [
   {
@@ -30,7 +31,8 @@ export const MainRoute: Routes = [
       GroupListRoute,
       AddGroupRoute,
       UserListRoute,
-      TestResultRoute
+      TestResultRoute,
+      Mp4ViewerRoute
     ]
   }
 ];
