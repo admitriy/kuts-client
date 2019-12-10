@@ -4,9 +4,9 @@
   <button *ngIf="isAuthorized" mat-button [matMenuTriggerFor]="menu">Меню</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/">Контент</button>
-    <button mat-menu-item routerLink="/panel/node">Редактирование контента</button>
-    <button mat-menu-item routerLink="/panel/group-list">Группы</button>
-    <button mat-menu-item>Выйти</button>
+    <button mat-menu-item routerLink="/panel/node" [disabled]="!isAdmin()">Редактирование контента</button>
+    <button mat-menu-item routerLink="/panel/group-list" [disabled]="!isAdmin()">Группы</button>
+    <button mat-menu-item (click)="exit();">Выйти</button>
   </mat-menu>
 
   <div *ngIf="isAuthorized">

@@ -1,7 +1,8 @@
 
 <!--<div class="content-wrapper">-->
   <button class="test-button" mat-raised-button color="primary" (click)="navigateToTest()">Пройти тестирование</button>
-  <div class="content">
+  <button class="test-button" mat-raised-button color="primary" (click)="fullScreen()" *ngIf="content && content.contentType && content.contentType == 'FLESH'" style="margin-left: 30px;">Полноэкранный режим</button>
+  <div class="content" id="content-child">
     <div *ngIf="content && content.contentType">
       <app-flash-viewer [(content)]="content" *ngIf="content.contentType == 'FLESH'"></app-flash-viewer>
       <app-pdf-viewer [(content)]="content" *ngIf="content.contentType == 'PDF'"></app-pdf-viewer>

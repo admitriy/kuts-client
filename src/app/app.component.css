@@ -25,7 +25,7 @@
 .content {
   display: flex;
   justify-content: center;
-  height: 800px;
+  /*height: 800px;*/
   overflow: auto;
 }
 
@@ -41,53 +41,8 @@
   margin: 0 auto;
 }
 
-/*.header {*/
-  /*margin-bottom: 10px;*/
-  /*border-bottom: 2px solid #e1e1e1;*/
-/*}*/
+:-webkit-full-screen  {
+  background: white;
+}
 
-/*.header__text {*/
-  /*font-size: 39px;*/
-  /*font-weight: 400;*/
-  /*text-decoration: none;*/
-  /*padding-top: 2px;*/
-  /*font-family: 'Museo-1';*/
-/*}*/
-
-/*.header_wrapper {*/
-  /*background: white;*/
-  /*padding: 10px 40px;*/
-/*}*/
-
-/*.header__menu {*/
-  /*display: flex;*/
-  /*justify-content: space-between;*/
-/*}*/
-
-/*.header__block {*/
-  /*display: flex;*/
-  /*align-items: center;*/
-/*}*/
-
-/*.logo {*/
-  /*display: flex;*/
-  /*align-items: center;*/
-/*}*/
-
-/*.logo__img {*/
-  /*height: 100px;*/
-/*}*/
-
-/*.logo__text {*/
-  /*margin-left: 10px;*/
-  /*color: #000;*/
-  /*font-size: 39px;*/
-  /*font-weight: 400;*/
-  /*text-decoration: none;*/
-  /*padding-top: 2px;*/
-/*}*/
-
-/*.logo__text--description {*/
-  /*font-size: 20px;*/
-/*}*/
 

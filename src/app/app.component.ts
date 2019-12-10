@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+    if (this.cookieService.get('kuts-token')) {
+      this.isAuthorized = true;
+    }
+
     this.register.group = {} as Group;
     this.navigationBarService.getAllGroups().subscribe(groups => {
       this.groups = groups;
@@ -46,5 +50,13 @@ export class AppComponent implements OnInit {
       this.cookieService.set('kuts-role', token.role);
       this.isAuthorized = true;
     });
+  }
+
+  exit() {
+    this.isAuthorized = false;
+  }
+
+  isAdmin() {
+    return this.cookieService.get('kuts-role') === 'ADMIN';
   }
 }

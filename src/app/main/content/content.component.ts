@@ -31,4 +31,9 @@ export class ContentComponent implements OnInit {
   navigateToTest() {
     this.router.navigate(['/test', this.currentNode]);
   }
+
+  fullScreen() {
+    const elem = document.getElementById('flash-id');
+    elem.requestFullscreen();
+  }
 }
