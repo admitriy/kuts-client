@@ -1,11 +1,10 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
 
 import { NavigationBarService } from '../http-client/navigation-bar.service';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
 import {Router} from '@angular/router';
-import {CookieService} from "ngx-cookie-service";
+import {DataSelectedNotificationService} from '../shared-services/data-selected-notification.service';
 
 @Component({
   selector: 'app-navigation-bar',
@@ -20,13 +19,11 @@ export class NavigationBarComponent implements OnInit {
 
   constructor(
     private navigationBarService: NavigationBarService,
-    private router: Router
+    private router: Router,
+    private dataSelectedNotificationService: DataSelectedNotificationService
   ) { }
 
-  response: GetNavigationBarItemsResponse[] = [];
-
   treeControl = new NestedTreeControl<GetNavigationBarItemsResponse>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<GetNavigationBarItemsResponse>();
   selectedNode = null;
 
   fileFormats = {
@@ -38,13 +35,7 @@ export class NavigationBarComponent implements OnInit {
   hasChild = (_: number, node: GetNavigationBarItemsResponse) => !!node.children && node.children.length > 0;
 
   getNavigationBarItems() {
-    return this.navigationBarService.getItems().subscribe(
-      (response) => {
-        console.log(response);
-        this.response = response;
-        this.dataSource.data = response;
-      }
-    );
+    this.dataSelectedNotificationService.getNavigationBarItems();
   }
 
   ngOnInit(): void {

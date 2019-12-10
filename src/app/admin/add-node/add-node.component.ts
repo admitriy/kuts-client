@@ -4,6 +4,8 @@ import {NavigationBarService} from '../../http-client/navigation-bar.service';
 import {GetNavigationBarItemsResponse} from '../../http-client/response/get-navigation-bar-items-response';
 import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
 import {ActivatedRoute} from '@angular/router';
+import {NavigationBarComponent} from '../../navigation-bar/navigation-bar.component';
+import {DataSelectedNotificationService} from '../../shared-services/data-selected-notification.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -15,7 +17,8 @@ export class AddNodeComponent implements OnInit {
 
   constructor(private location: Location,
               private navigationBarService: NavigationBarService,
-              private routeSub: ActivatedRoute) { }
+              private routeSub: ActivatedRoute,
+              private dataSelectedNotificationService: DataSelectedNotificationService) { }
 
   ngOnInit() {
     this.node = {} as GetNavigationBarItemsResponse;
@@ -28,16 +31,10 @@ export class AddNodeComponent implements OnInit {
     });
   }
 
-  // uploadFile(event: any, upload: any) {
-  //   upload._disabled = true;
-  //   this.navigationBarService.uploadFile(event.target.files[0]).subscribe(e => {
-  //     // this.node.content.content = e;
-  //     upload._disabled = false;
-  //   });
-  // }
 
   save() {
     this.navigationBarService.saveNode(this.node).subscribe(e => {
+      this.dataSelectedNotificationService.getNavigationBarItems();
       this.back();
     });
   }
@@ -45,12 +42,4 @@ export class AddNodeComponent implements OnInit {
   back() {
     this.location.back();
   }
-
-  // removeContent(upload: any) {
-  //   upload._disabled = true;
-  //   this.navigationBarService.deleteFile(this.node.content.content).subscribe(e => {
-  //     // this.node.content.content = '';
-  //     upload._disabled = false;
-  //   });
-  // }
 }
