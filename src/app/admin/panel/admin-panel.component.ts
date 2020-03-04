@@ -13,7 +13,7 @@ export class AdminPanelComponent implements OnInit {
   constructor(private router: Router,
               private routeSub: ActivatedRoute,
               private navigationBarService: NavigationBarService,
-              private dataSelectedNotificationService: DataSelectedNotificationService){ }
+              public dataSelectedNotificationService: DataSelectedNotificationService){ }
 
   ngOnInit() {
     this.routeSub.params.subscribe((param) => {

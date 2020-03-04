@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Auth} from './http-client/response/auth/auth';
 import {Register} from './http-client/response/auth/register';
 import {Group} from './http-client/response/auth/group';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarService} from './http-client/navigation-bar.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
   constructor(
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
-    private cookieService: CookieService) {
+    private cookieService: CookieService,
+    private router: Router) {
   }
 
 
@@ -46,13 +47,15 @@ export class AppComponent implements OnInit {
 
   registration() {
     this.navigationBarService.registration(this.register).subscribe(token => {
-      this.cookieService.set('kuts-token', token.token);
-      this.cookieService.set('kuts-role', token.role);
+      this.cookieService.set('/kuts-token', token.token);
+      this.cookieService.set('/kuts-role', token.role);
       this.isAuthorized = true;
     });
   }
 
   exit() {
+    this.router.navigate(['/']);
+    this.cookieService.deleteAll();
     this.isAuthorized = false;
   }
 

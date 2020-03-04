@@ -14,7 +14,6 @@ export class DataSelectedNotificationService {
   getNavigationBarItems() {
     return this.navigationBarService.getItems().subscribe(
       (response) => {
-        console.log(response);
         this.barManu = response;
         this.dataSource.data = this.barManu;
       }

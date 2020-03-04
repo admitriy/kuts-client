@@ -20,7 +20,7 @@ export class NavigationBarComponent implements OnInit {
   constructor(
     private navigationBarService: NavigationBarService,
     private router: Router,
-    private dataSelectedNotificationService: DataSelectedNotificationService
+    public dataSelectedNotificationService: DataSelectedNotificationService
   ) { }
 
   treeControl = new NestedTreeControl<GetNavigationBarItemsResponse>(node => node.children);
