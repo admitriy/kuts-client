@@ -46,7 +46,6 @@ export class NavigationBarComponent implements OnInit {
     if (this.currentTarget) {
       this.currentTarget.style.background = 'white';
     }
-
     this.currentTarget = event.currentTarget;
     this.currentTarget.style.background = '#f1efef';
     const rootRout = this.router.url.split('/')[1];
