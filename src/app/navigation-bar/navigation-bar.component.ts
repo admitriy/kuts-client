@@ -44,11 +44,11 @@ export class NavigationBarComponent implements OnInit {
 
   getSelectedNode(node: GetNavigationBarItemsResponse, event: any) {
     if (this.currentTarget) {
-      this.currentTarget.style.textDecoration = 'none';
+      this.currentTarget.style.background = 'white';
     }
 
-    this.currentTarget = event.target;
-    this.currentTarget.style.textDecoration = 'underline';
+    this.currentTarget = event.currentTarget;
+    this.currentTarget.style.background = '#f1efef';
     const rootRout = this.router.url.split('/')[1];
     this.selectedNode = node;
     if (rootRout === 'panel') {

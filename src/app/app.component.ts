@@ -63,6 +63,6 @@ export class AppComponent implements OnInit {
   }
 
   isAdmin() {
-    return this.cookieService.get('kuts-role') === 'ADMIN';
+    return this.cookieService.get(this.roleCookieConstant) === 'ADMIN';
   }
 }
