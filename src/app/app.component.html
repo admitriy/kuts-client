@@ -9,9 +9,10 @@
     <button mat-menu-item (click)="exit();">Выйти</button>
   </mat-menu>
 
-  <div [hidden]="!isAuthorized">
+  <div *ngIf="isAuthorized">
     <app-navigation-bar class="menu"></app-navigation-bar>
-
+  </div>
+  <div [hidden]="!isAuthorized">
     <div class="content">
         <router-outlet></router-outlet>
     </div>
