@@ -1,23 +1,23 @@
 <mat-tree [dataSource]="this.dataSelectedNotificationService.dataSource" [treeControl]="treeControl" class="example-tree">
   <!-- This is the tree node template for leaf nodes -->
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
-    <li class="mat-tree-node">
+    <li class="mat-tree-node node-name" (click)="getSelectedNode(node, $event)">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-      <p class="node-name" (click)="getSelectedNode(node, $event)">{{node.fullName}}</p>
+      <p>{{node.fullName}}</p>
     </li>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
   <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-    <li>
-      <div class="mat-tree-node">
+    <li class="node-name">
+      <div class="mat-tree-node" (click)="getSelectedNode(node, $event)">
         <button mat-icon-button matTreeNodeToggle
                 [attr.aria-label]="'toggle ' + node.fullName">
           <mat-icon class="mat-icon-rtl-mirror">
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon> <!-- Стрелка, которую нужно убрать -->
         </button>
-        <p class="node-name" (click)="getSelectedNode(node, $event)">{{node.fullName}}</p>
+        <p>{{node.fullName}}</p>
       </div>
       <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
         <ng-container matTreeNodeOutlet></ng-container>

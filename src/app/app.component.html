@@ -4,12 +4,12 @@
   <button *ngIf="isAuthorized" mat-button [matMenuTriggerFor]="menu">Меню</button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/">Контент</button>
-    <button mat-menu-item routerLink="/panel/node" [disabled]="!isAdmin()">Редактирование контента</button>
-    <button mat-menu-item routerLink="/panel/group-list" [disabled]="!isAdmin()">Группы</button>
+    <button mat-menu-item routerLink="/panel/node" *ngIf="isAdmin()">Редактирование контента</button>
+    <button mat-menu-item routerLink="/panel/group-list" *ngIf="isAdmin()">Группы</button>
     <button mat-menu-item (click)="exit();">Выйти</button>
   </mat-menu>
 
-  <div *ngIf="isAuthorized">
+  <div [hidden]="!isAuthorized">
     <app-navigation-bar class="menu"></app-navigation-bar>
 
     <div class="content">
@@ -27,7 +27,7 @@
               <input matInput placeholder="Логин" [(ngModel)]="auth.login" name="header" required>
             </mat-form-field>
             <mat-form-field class="auth-input">
-              <input matInput placeholder="Пароль" [(ngModel)]="auth.password" name="header" required>
+              <input type="password" matInput placeholder="Пароль" [(ngModel)]="auth.password" name="header" required>
             </mat-form-field>
             <button class="auth-input" mat-raised-button color="primary" [disabled]="!authForm.valid">Войти</button>
           </div>
@@ -41,7 +41,7 @@
               <input matInput placeholder="Логин" [(ngModel)]="register.login" name="header" required>
             </mat-form-field>
             <mat-form-field class="auth-input">
-              <input matInput placeholder="Пароль" [(ngModel)]="register.password" name="header" required>
+              <input type="password" matInput placeholder="Пароль" [(ngModel)]="register.password" name="header" required>
             </mat-form-field>
             <mat-form-field class="auth-input">
               <input matInput placeholder="ФИО" [(ngModel)]="register.name" name="header" required>

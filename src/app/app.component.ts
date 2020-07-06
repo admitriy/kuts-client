@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   auth: Auth = {} as Auth;
   register: Register = {} as Register;
   groups: Group[];
+  roleCookieConstant = 'kuts-role';
+  tokenCookieConstant = 'kuts-token';
 
   constructor(
     private routeSub: ActivatedRoute,
@@ -27,7 +29,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.cookieService.get('kuts-token')) {
+    if (this.cookieService.get(this.tokenCookieConstant)) {
       this.isAuthorized = true;
     }
 
@@ -39,27 +41,28 @@ export class AppComponent implements OnInit {
 
   authorizarion() {
     this.navigationBarService.authorization(this.auth).subscribe(token => {
-      this.cookieService.set('kuts-token', token.token);
-      this.cookieService.set('kuts-role', token.role);
+      this.cookieService.set(this.tokenCookieConstant, token.token);
+      this.cookieService.set(this.roleCookieConstant, token.role);
       this.isAuthorized = true;
     });
   }
 
   registration() {
     this.navigationBarService.registration(this.register).subscribe(token => {
-      this.cookieService.set('/kuts-token', token.token);
-      this.cookieService.set('/kuts-role', token.role);
+      this.cookieService.set('/' + this.tokenCookieConstant, token.token);
+      this.cookieService.set('/' + this.roleCookieConstant, token.role);
       this.isAuthorized = true;
     });
   }
 
   exit() {
     this.router.navigate(['/']);
-    this.cookieService.deleteAll();
+    this.cookieService.delete(this.roleCookieConstant, '/');
+    this.cookieService.delete(this.tokenCookieConstant, '/');
     this.isAuthorized = false;
   }
 
   isAdmin() {
-    return this.cookieService.get('kuts-role') === 'ADMIN';
+    return this.cookieService.get(this.roleCookieConstant) === 'ADMIN';
   }
 }
