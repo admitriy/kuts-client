@@ -4,7 +4,10 @@ html, body { height: 100%; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: rgb(248, 233, 233);
+  background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.8)), linear-gradient(to left, rgb(255, 255, 255), rgba(255, 255, 255, 0.8)), url("assets/img/background_left.png"), url("assets/img/background_right.png");
+  background-position: right, left;
+  background-size: 25%;
+  background-repeat: repeat-y;
 }
 
 /* fallback */
