@@ -5,6 +5,7 @@ import {Group} from './http-client/response/auth/group';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarService} from './http-client/navigation-bar.service';
 import { CookieService } from 'ngx-cookie-service';
+import {DataSelectedNotificationService} from './shared-services/data-selected-notification.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +25,8 @@ export class AppComponent implements OnInit {
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
     private cookieService: CookieService,
-    private router: Router) {
+    private router: Router,
+    public dataSelectedNotificationService: DataSelectedNotificationService) {
   }
 
 
@@ -64,5 +66,10 @@ export class AppComponent implements OnInit {
 
   isAdmin() {
     return this.cookieService.get(this.roleCookieConstant) === 'ADMIN';
+  }
+
+  toContent() {
+    this.router.navigate(['/']);
+    this.dataSelectedNotificationService.getNavigationBarItems();
   }
 }

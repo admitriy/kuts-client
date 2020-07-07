@@ -13,7 +13,7 @@ import {DataSelectedNotificationService} from '../shared-services/data-selected-
 @Injectable({
   providedIn: 'root'
 })
-export class NavigationBarComponent implements OnInit {
+export class NavigationBarComponent implements OnInit{
   currentTarget;
 
   constructor(
@@ -41,17 +41,21 @@ export class NavigationBarComponent implements OnInit {
   }
 
   getSelectedNode(node: GetNavigationBarItemsResponse, event: any) {
+    console.log(!(node.hasTest || node.hasContent || this.isPanel()));
     if (this.currentTarget) {
       this.currentTarget.style.background = 'white';
     }
     this.currentTarget = event.currentTarget;
     this.currentTarget.style.background = '#f1efef';
-    const rootRout = this.router.url.split('/')[1];
     this.selectedNode = node;
-    if (rootRout === 'panel') {
+    if (this.isPanel()) {
       this.router.navigate(['/panel/node', this.selectedNode.id]);
     } else {
       this.router.navigate(['/content', this.selectedNode.id]);
     }
+  }
+
+  isPanel() {
+    return this.router.url.split('/')[1] === 'panel';
   }
 }

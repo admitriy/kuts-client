@@ -3,7 +3,7 @@
 
   <button *ngIf="isAuthorized" mat-button [matMenuTriggerFor]="menu">Меню</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/">Контент</button>
+    <button mat-menu-item (click) = "toContent()">Контент</button>
     <button mat-menu-item routerLink="/panel/node" *ngIf="isAdmin()">Редактирование контента</button>
     <button mat-menu-item routerLink="/panel/group-list" *ngIf="isAdmin()">Группы</button>
     <button mat-menu-item (click)="exit();">Выйти</button>
@@ -14,7 +14,7 @@
   </div>
   <div [hidden]="!isAuthorized">
     <div class="content">
-        <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
   </div>
 

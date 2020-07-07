@@ -8,4 +8,6 @@ export interface GetNavigationBarItemsResponse {
     // content: NavigationBarItemContent;
     parentNode: string | null;
     children?: GetNavigationBarItemsResponse[];
+    hasTest: boolean;
+    hasContent: boolean;
 }
