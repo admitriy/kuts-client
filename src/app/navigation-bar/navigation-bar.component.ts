@@ -1,5 +1,4 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import { NestedTreeControl } from '@angular/cdk/tree';
 
 import { NavigationBarService } from '../http-client/navigation-bar.service';
 import { GetNavigationBarItemsResponse } from '../http-client/response/get-navigation-bar-items-response';
@@ -23,7 +22,6 @@ export class NavigationBarComponent implements OnInit {
     public dataSelectedNotificationService: DataSelectedNotificationService
   ) { }
 
-  treeControl = new NestedTreeControl<GetNavigationBarItemsResponse>(node => node.children);
   selectedNode = null;
 
   fileFormats = {
