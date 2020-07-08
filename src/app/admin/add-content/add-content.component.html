@@ -21,10 +21,13 @@
     <button type = "button" class="admin-element" mat-raised-button #upload
       (click)="content.content ? removeContent(upload) : file.click();"
       color="{{content.content ? 'accent' : 'basic'}}">
-      {{content.content ? 'Удалить контент' : 'Загрузить контент'}}
+      {{content.content ? 'Удалить файл' : 'Загрузить файл'}}
     </button>
 
     <button class="admin-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>
+
+    <button type = "button" *ngIf="content.id" (click)="removeContentEntity()" class="admin-element" color="accent" mat-raised-button>Удалить контент</button>
+
     <button type = "button" (click)="back()" class="admin-element" mat-raised-button>Назад</button>
   </div>
 </form>

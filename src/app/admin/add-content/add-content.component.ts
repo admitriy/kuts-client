@@ -57,6 +57,12 @@ export class AddContentComponent implements OnInit {
     });
   }
 
+  removeContentEntity() {
+    this.navigationBarService.removeContentEntity(this.content.id).subscribe(e => {
+      this.back();
+    });
+  }
+
   back() {
     this.location.back();
   }

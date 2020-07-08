@@ -73,8 +73,16 @@ export class NavigationBarService {
     return this.http.post<NavigationBarItemContent>(AppSettings.API + 'content/', content, this.getAuthourisationHeader());
   }
 
+  removeContentEntity(contentId: string) {
+    return this.http.delete(AppSettings.API + 'content/' + contentId, this.getAuthourisationHeader());
+  }
+
   saveTest(test: ItemNodeTest) {
     return this.http.post<ItemNodeTest>(AppSettings.API + 'test/', test, this.getAuthourisationHeader());
+  }
+
+  removeTest(testId: string) {
+    return this.http.delete(AppSettings.API + 'test/' + testId, this.getAuthourisationHeader());
   }
 
   updateNode(node: GetNavigationBarItemsResponse) {

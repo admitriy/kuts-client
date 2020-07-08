@@ -43,6 +43,12 @@ export class AddTestComponent implements OnInit {
     });
   }
 
+  removeTest() {
+    this.navigationBarService.removeTest(this.test.id).subscribe(e => {
+      this.back();
+    });
+  }
+
   back() {
     this.location.back();
   }

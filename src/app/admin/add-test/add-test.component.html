@@ -39,6 +39,9 @@
     <button type = "button" (click)="addQuestion()" class="test-element" color="primary" mat-stroked-button>Добавить вопрос</button>
 
     <button class="test-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>
+
+    <button type = "button" *ngIf="test.id" (click)="removeTest()" class="test-element" color="accent" mat-raised-button>Удалить тест</button>
+
     <button type = "button" (click)="back()" class="test-element" mat-raised-button>Назад</button>
   </div>
 </form>

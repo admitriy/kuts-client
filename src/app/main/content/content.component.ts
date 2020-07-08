@@ -11,6 +11,7 @@ import {NavigationBarItemContent} from '../../http-client/response/content/navig
 export class ContentComponent implements OnInit {
   content: NavigationBarItemContent;
   currentNode: any;
+  hasTest: boolean;
 
   constructor(
     private routeSub: ActivatedRoute,
@@ -24,6 +25,7 @@ export class ContentComponent implements OnInit {
       this.navigationBarService.getContentByNodeId(param.nodeId).subscribe(content => {
         this.content = content;
         this.currentNode = param.nodeId;
+        this.hasTest = param.hasTest;
       });
     });
   }

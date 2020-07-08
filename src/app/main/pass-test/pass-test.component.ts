@@ -58,6 +58,6 @@ export class PassTestComponent implements OnInit {
   }
 
   backToConent() {
-    this.router.navigate(['/content', this.nodeId]);
+    this.router.navigate(['/content', this.nodeId, true]);
   }
 }

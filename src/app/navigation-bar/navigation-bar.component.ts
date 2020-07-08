@@ -41,7 +41,6 @@ export class NavigationBarComponent implements OnInit{
   }
 
   getSelectedNode(node: GetNavigationBarItemsResponse, event: any) {
-    console.log(!(node.hasTest || node.hasContent || this.isPanel()));
     if (this.currentTarget) {
       this.currentTarget.style.background = 'white';
     }
@@ -51,7 +50,7 @@ export class NavigationBarComponent implements OnInit{
     if (this.isPanel()) {
       this.router.navigate(['/panel/node', this.selectedNode.id]);
     } else {
-      this.router.navigate(['/content', this.selectedNode.id]);
+      this.router.navigate(['/content', this.selectedNode.id, this.selectedNode.hasTest]);
     }
   }
 
