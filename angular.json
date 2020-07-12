@@ -134,5 +134,11 @@
       }
     }
   },
-  "defaultProject": "kutc-client"
+  "defaultProject": "kutc-client",
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false
+    },
+    "analytics": "8f9293d3-ac48-41e3-b96f-1b9ac3becccf"
+  }
 }

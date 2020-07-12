@@ -10,18 +10,20 @@ import {Group} from "./response/auth/group";
 import {Auth} from "./response/auth/auth";
 import {Register} from "./response/auth/register";
 import {Token} from "./response/auth/token";
-import {CookieService} from "ngx-cookie-service";
 import {User} from './response/auth/user';
 import {TestResult} from './response/test/test-result';
+import {DataSelectedNotificationService} from '../shared-services/data-selected-notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class NavigationBarService {
+  public kutsRole: string;
+  public kutsToken: string;
+
   constructor(
     private http: HttpClient,
-    private cookieService: CookieService
   ) {
   }
 
@@ -96,7 +98,7 @@ export class NavigationBarService {
   uploadFile(file: any) {
     const formData = new FormData();
     formData.append('file', file);
-    const headers = new HttpHeaders({'enctype': 'multipart/form-data', 'Authorization': this.cookieService.get("kuts-token")});
+    const headers = new HttpHeaders({'enctype': 'multipart/form-data', 'Authorization': this.kutsToken});
 
     return this.http.post<string>(AppSettings.API + 'file/', formData, {headers: headers});
   }
@@ -122,6 +124,6 @@ export class NavigationBarService {
   }
 
   getAuthourisationHeader() {
-    return {headers: new HttpHeaders({'Authorization': this.cookieService.get("kuts-token")})};
+    return {headers: new HttpHeaders({'Authorization': this.kutsToken})};
   }
 }

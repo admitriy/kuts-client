@@ -4,8 +4,8 @@ import {Register} from './http-client/response/auth/register';
 import {Group} from './http-client/response/auth/group';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarService} from './http-client/navigation-bar.service';
-import { CookieService } from 'ngx-cookie-service';
 import {DataSelectedNotificationService} from './shared-services/data-selected-notification.service';
+import { remote } from 'electron';
 
 @Component({
   selector: 'app-root',
@@ -24,14 +24,13 @@ export class AppComponent implements OnInit {
   constructor(
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
-    private cookieService: CookieService,
     private router: Router,
     public dataSelectedNotificationService: DataSelectedNotificationService) {
   }
 
 
   ngOnInit(): void {
-    if (this.cookieService.get(this.tokenCookieConstant)) {
+    if (this.navigationBarService.kutsToken) {
       this.isAuthorized = true;
     }
 
@@ -43,33 +42,42 @@ export class AppComponent implements OnInit {
 
   authorizarion() {
     this.navigationBarService.authorization(this.auth).subscribe(token => {
-      this.cookieService.set(this.tokenCookieConstant, token.token);
-      this.cookieService.set(this.roleCookieConstant, token.role);
+      this.navigationBarService.kutsToken = token.token;
+      this.navigationBarService.kutsRole = token.role;
       this.isAuthorized = true;
     });
   }
 
   registration() {
     this.navigationBarService.registration(this.register).subscribe(token => {
-      this.cookieService.set('/' + this.tokenCookieConstant, token.token);
-      this.cookieService.set('/' + this.roleCookieConstant, token.role);
+      this.navigationBarService.kutsToken = token.token;
+      this.navigationBarService.kutsRole = token.role;
       this.isAuthorized = true;
     });
   }
 
   exit() {
     this.router.navigate(['/']);
-    this.cookieService.delete(this.roleCookieConstant, '/');
-    this.cookieService.delete(this.tokenCookieConstant, '/');
+    this.removeCookie(this.roleCookieConstant);
+    this.removeCookie(this.tokenCookieConstant);
     this.isAuthorized = false;
   }
 
   isAdmin() {
-    return this.cookieService.get(this.roleCookieConstant) === 'ADMIN';
+    return this.getRole() === 'ADMIN';
   }
 
   toContent() {
     this.router.navigate(['/']);
     this.dataSelectedNotificationService.getNavigationBarItems();
+  }
+
+  removeCookie(name: string) {
+    this.navigationBarService.kutsRole = null;
+    this.navigationBarService.kutsToken = null;
+  }
+
+  getRole() {
+    return this.navigationBarService.kutsRole;
   }
 }

@@ -4,6 +4,7 @@ import { NavigationBarService } from '../../../http-client/navigation-bar.servic
 import {DomSanitizer} from '@angular/platform-browser';
 import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
 import {AppSettings} from '../../../constants/AppSettings';
+import {remote} from 'electron';
 
 @Component({
   selector: 'app-html-viewer',
@@ -25,7 +26,7 @@ export class HtmlViewerComponent implements OnInit {
 
   ngOnInit() {
     if (this.content) {
-      this.htmlLink = this.link + this.content.content;
+      this.htmlLink = ('file:\\\\\\' + remote.app.getAppPath() + '\\files\\' + this.content.content).replace('\\', '/');
       this.objecthtml = '<iframe src="' + this.htmlLink + '"></iframe>';
       this.swfDiv.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.objecthtml));
     }

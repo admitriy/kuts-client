@@ -4,6 +4,7 @@ import { NavigationBarService } from '../../../http-client/navigation-bar.servic
 import {DomSanitizer} from '@angular/platform-browser';
 import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
 import {AppSettings} from '../../../constants/AppSettings';
+import {remote} from 'electron';
 
 @Component({
   selector: 'app-flash-viewer',
@@ -24,12 +25,16 @@ export class FlashViewerComponent implements OnInit {
     private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+
     if (this.content) {
       this.flashLink = this.link + this.content.content;
-      this.objectSwf = '<object type="application/x-shockwave-flash" width="700px" height="700px" *ngIf="flashLink" id="flash-id">\n' +
+      // this.flashLink = (remote.app.getAppPath() + '\\files\\' + this.content.content);
+      this.objectSwf = '' +
+        '<object type="application/x-shockwave-flash" width="700px" height="700px" id="flash-id">\n' +
         '  <param name="wmode" />\n' +
         '  <param name="movie" value="' + this.flashLink + '" />\n' +
         '</object>';
+
       this.swfDiv.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.objectSwf));
     }
   }

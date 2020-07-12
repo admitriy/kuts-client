@@ -30,7 +30,6 @@ import {AddTestRoute} from './admin/add-test/add-test.route';
 import {HeaderMainComponent} from './header-main/header-main.component';
 import {PassTestComponent} from './main/pass-test/pass-test.component';
 import {PassTestRoute} from './main/pass-test/pass-test.route';
-import {CookieService} from "ngx-cookie-service";
 import {GroupListComponent} from './admin/group-list/group-list.component';
 import {GroupListRoute} from './admin/group-list/group-list.route';
 import {AddGroupComponent} from './admin/add-group/add-group.component';
@@ -93,7 +92,7 @@ import {Mp4ViewerComponent} from './main/files/mp4-viewer/mp4-viewer.component';
     // ]),
     // MainModule
   ],
-  providers: [ CookieService ],
+  providers: [  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationBarService } from '../../../http-client/navigation-bar.service';
 import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
 import {AppSettings} from '../../../constants/AppSettings';
+import {remote} from 'electron';
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -20,7 +21,7 @@ export class PdfViewerComponent implements OnInit {
 
   ngOnInit() {
     if (this.content) {
-      this.pdfLink = this.link + this.content.content;
+      this.pdfLink = ('file:\\\\\\' + remote.app.getAppPath() + '\\files\\' + this.content.content).replace('\\', '/');
     }
   }
 }
