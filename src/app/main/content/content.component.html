@@ -1,10 +1,17 @@
-<button [hidden]="!hasTest" class="test-button" mat-raised-button color="primary" (click)="navigateToTest()">Пройти тестирование</button>
-<button class="test-button" mat-raised-button color="primary" (click)="fullScreen()" *ngIf="content && content.contentType && content.contentType == 'FLESH'" style="margin-left: 30px;">Полноэкранный режим</button>
-<div class="content" id="content-child">
-  <div *ngIf="content && content.contentType">
-    <app-flash-viewer [(content)]="content" *ngIf="content.contentType == 'FLESH'"></app-flash-viewer>
-    <app-pdf-viewer [(content)]="content" *ngIf="content.contentType == 'PDF'"></app-pdf-viewer>
-    <app-html-viewer [(content)]="content" *ngIf="content.contentType == 'HTML'"></app-html-viewer>
-    <app-mp4-viewer [(content)]="content" *ngIf="content.contentType == 'MP4'"></app-mp4-viewer>
+<div *ngIf = "!this.downloadComplete && totalMb > 0">
+  <h2>Загружено {{currentMb}} из {{totalMb}}</h2>
+  <mat-progress-bar mode="determinate" value="{{this.percentDownload}}"></mat-progress-bar>
+</div>
+
+<div *ngIf = "this.downloadComplete">
+  <button [hidden]="!hasTest" class="test-button" mat-raised-button color="primary" (click)="navigateToTest()">Пройти тестирование</button>
+  <button class="test-button" mat-raised-button color="primary" (click)="fullScreen()" *ngIf="content && content.contentType && content.contentType == 'FLESH'" style="margin-left: 30px;">Полноэкранный режим</button>
+  <div class="content" id="content-child">
+    <div *ngIf="content && content.contentType">
+      <app-flash-viewer [(content)]="content" *ngIf="content.contentType == 'FLESH'"></app-flash-viewer>
+      <app-pdf-viewer [(content)]="content" *ngIf="content.contentType == 'PDF'"></app-pdf-viewer>
+      <app-html-viewer [(content)]="content" *ngIf="content.contentType == 'HTML'"></app-html-viewer>
+      <app-mp4-viewer [(content)]="content" *ngIf="content.contentType == 'MP4'"></app-mp4-viewer>
+    </div>
   </div>
 </div>

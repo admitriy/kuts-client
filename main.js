@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
 const { download } = require('electron-dl');
 const path = require('path');
 
@@ -16,9 +16,9 @@ let win;
 function createWindow () {
   // Create the browser window.
 
-  win = new BrowserWindow({ webPreferences: {webSecurity: false, plugins: true} });
-  win.maximize(true);
-  win.setResizable(false);
+  win = new BrowserWindow({width:1500, height: 1000, webPreferences: {webSecurity: false, plugins: true} });
+  // win.maximize(true);
+  // win.setResizable(false);
 
   // and load the index.html of the app.
   win.loadFile('./dist/kutc-client/index.html');
@@ -61,11 +61,18 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-ipcMain.on('download', (e, args) => {
+ipcMain.on('download', (event, args) => {
   let path = 'files';
   if (!require('fs').existsSync(path + '\\' + args.content)) {
-    download(BrowserWindow.getFocusedWindow(), 'http://192.168.0.10:8084/api/1/file/' + args.content,
-      {directory: path, saveAs: false, showBadge: true})
-      .then(e => console.log(e));
+    download(BrowserWindow.getFocusedWindow(), 'http://localhost:8084/api/1/file/' + args.content, {
+        directory: path,
+        saveAs: false,
+        showBadge: true,
+        onProgress: function(e) {
+          event.sender.send('download',e)
+        }})
+      .then(e => event.sender.send('download',e));
+  } else {
+    event.sender.send('download', {exist: true})
   }
 });
