@@ -7,10 +7,10 @@ const DecompressZip = require('decompress-zip');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 // app.commandLine.appendSwitch('ppapi-flash-path', './dist/kutc-client/assets/pepflashplayer64_32_0_0_387.dll');
-app.commandLine.appendSwitch('ppapi-flash-path', __dirname + '\\dist\\kutc-client\\assets\\pepflashplayer64_32_0_0_387.dll');
+app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, 'pepflashplayer64_32_0_0_387.dll'));
 app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.387');
 
-console.log(__dirname + '\\dist\\kutc-client\\assets\\pepflashplayer64_32_0_0_387.dll');
+console.log( path.join(__dirname, 'pepflashplayer64_32_0_0_387.dll'));
 console.log(app.getAppPath());
 
 let win;
