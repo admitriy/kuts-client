@@ -27,14 +27,13 @@ export class FlashViewerComponent implements OnInit {
   ngOnInit() {
 
     if (this.content) {
-      this.flashLink = this.link + this.content.content;
-      // this.flashLink = (remote.app.getAppPath() + '\\files\\' + this.content.content);
+      // this.flashLink = this.link + this.content.content;
+      this.flashLink =  (remote.app.getAppPath() + '\\files\\' + this.content.content);
       this.objectSwf = '' +
         '<object type="application/x-shockwave-flash" width="700px" height="700px" id="flash-id" class="flash-class">\n' +
         '  <param name="wmode" />\n' +
         '  <param name="movie" value="' + this.flashLink + '" />\n' +
         '</object>';
-
       this.swfDiv.nativeElement.innerHTML = this.sanitizer.sanitize(SecurityContext.HTML, this.sanitizer.bypassSecurityTrustHtml(this.objectSwf));
     }
   }

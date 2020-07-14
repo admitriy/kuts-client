@@ -1,4 +1,4 @@
-import {ApplicationRef, Component, OnInit} from '@angular/core';
+import {ApplicationRef, Component, NgZone, OnInit} from '@angular/core';
 import {NavigationBarService} from '../../http-client/navigation-bar.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
@@ -23,7 +23,8 @@ export class ContentComponent implements OnInit {
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
     private router: Router,
-    private ref: ApplicationRef) {
+    private ref: ApplicationRef,
+    private ngZone: NgZone) {
   }
 
   ngOnInit() {
@@ -64,7 +65,7 @@ export class ContentComponent implements OnInit {
   }
 
   navigateToTest() {
-    this.router.navigate(['/test', this.currentNode]);
+    this.ngZone.run(() => this.router.navigate(['/test', this.currentNode])).then();
   }
 
   fullScreen() {

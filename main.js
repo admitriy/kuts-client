@@ -7,10 +7,11 @@ const DecompressZip = require('decompress-zip');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 // app.commandLine.appendSwitch('ppapi-flash-path', './dist/kutc-client/assets/pepflashplayer64_32_0_0_387.dll');
-app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, './dist/kutc-client/assets/pepflashplayer64_32_0_0_387.dll'));
+app.commandLine.appendSwitch('ppapi-flash-path', __dirname + '\\dist\\kutc-client\\assets\\pepflashplayer64_32_0_0_387.dll');
 app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.387');
 
-console.log(path.join(__dirname, 'pepflashplayer64_32_0_0_387.dll'));
+console.log(__dirname + '\\dist\\kutc-client\\assets\\pepflashplayer64_32_0_0_387.dll');
+console.log(app.getAppPath());
 
 let win;
 
@@ -22,8 +23,9 @@ function createWindow () {
   // win.setResizable(false);
 
   // and load the index.html of the app.
-  // win.loadFile('./dist/kutc-client/index.html');
-  win.loadURL('http://localhost:4200/index.html');
+  win.loadFile('./dist/kutc-client/index.html');
+  // win.loadFile('C:/Users/Mi/Desktop/index.html');
+  // win.loadURL('http://localhost:4200/index.html');
 
   // Open the DevTools.
   //win.webContents.openDevTools()
@@ -63,7 +65,7 @@ app.on('activate', () => {
 // code. You can also put them in separate files and require them here.
 
 ipcMain.on('download', (event, args) => {
-  let path = 'files';
+  let path = app.getAppPath() + '\\files';
   if (!require('fs').existsSync(path + '\\' + args.content)) {
     download(BrowserWindow.getFocusedWindow(), 'http://localhost:8084/api/1/file/' + args.content, {
         directory: path,
@@ -82,7 +84,7 @@ ipcMain.on('download', (event, args) => {
 
 
 ipcMain.on('decompress', (event, args) => {
-  let path = 'files';
+  let path = app.getAppPath() + '\\files';
   const zipFolder = path + '\\' +  'ZIP-' + args.file;
 
   if (require('fs').existsSync(zipFolder)) {
@@ -103,5 +105,5 @@ ipcMain.on('decompress', (event, args) => {
 
 ipcMain.on('openFile', (event, args) => {
   let path = 'files';
-  shell.openItem(__dirname + '\\' + path + '\\' + args.path);
+  shell.openItem(app.getAppPath() + '\\' + path + '\\' + args.path);
 });
