@@ -6,6 +6,7 @@ import {ItemQuestion} from '../../http-client/response/test/item-question';
 import {ItemChoice} from '../../http-client/response/test/item-choice';
 import {GetNavigationBarItemsResponse} from '../../http-client/response/get-navigation-bar-items-response';
 import {Location} from '@angular/common';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-add-test',
@@ -18,7 +19,8 @@ export class AddTestComponent implements OnInit {
 
   constructor(private navigationBarService: NavigationBarService,
               private routeSub: ActivatedRoute,
-              private location: Location) {
+              private location: Location,
+              private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -40,7 +42,7 @@ export class AddTestComponent implements OnInit {
   save() {
     this.navigationBarService.saveTest(this.test).subscribe(e => {
       this.back();
-    });
+    }, (error => { this.openSnackBar(error.error.message, 'OK'); }));
   }
 
   removeTest() {
@@ -73,5 +75,11 @@ export class AddTestComponent implements OnInit {
 
   removeQuestion(questionIndex: any) {
     this.test.questions.splice(questionIndex, 1);
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

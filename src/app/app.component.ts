@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarService} from './http-client/navigation-bar.service';
 import {DataSelectedNotificationService} from './shared-services/data-selected-notification.service';
 import { remote } from 'electron';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit {
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
     private router: Router,
-    public dataSelectedNotificationService: DataSelectedNotificationService) {
+    public dataSelectedNotificationService: DataSelectedNotificationService,
+    private _snackBar: MatSnackBar) {
   }
 
 
@@ -45,6 +47,8 @@ export class AppComponent implements OnInit {
       this.navigationBarService.kutsToken = token.token;
       this.navigationBarService.kutsRole = token.role;
       this.isAuthorized = true;
+    }, error => {
+      this.openSnackBar(error.error.message, 'OK');
     });
   }
 
@@ -53,6 +57,8 @@ export class AppComponent implements OnInit {
       this.navigationBarService.kutsToken = token.token;
       this.navigationBarService.kutsRole = token.role;
       this.isAuthorized = true;
+    }, error => {
+      this.openSnackBar(error.error.message, 'OK');
     });
   }
 
@@ -79,5 +85,11 @@ export class AppComponent implements OnInit {
 
   getRole() {
     return this.navigationBarService.kutsRole;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }
