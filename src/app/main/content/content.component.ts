@@ -25,7 +25,9 @@ export class ContentComponent implements OnInit {
     this.routeSub.params.subscribe((param) => {
       this.content = null;
       this.navigationBarService.getContentByNodeId(param.nodeId).subscribe(content => {
-        ipcRenderer.send('download', {content: content.content});
+        if (content) {
+          ipcRenderer.send('download', {content: content.content});
+        }
         this.content = content;
         this.currentNode = param.nodeId;
         this.hasTest = param.hasTest;
@@ -38,9 +40,7 @@ export class ContentComponent implements OnInit {
   }
 
   fullScreen() {
-    const elem = document.getElementById('flash-id');
-    console.log(123)
-    console.log(elem)
-    elem.requestFullscreen();
+    const elem: any = document.getElementsByClassName('flash-class')[0];
+    elem.webkitRequestFullscreen();
   }
 }

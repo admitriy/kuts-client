@@ -5,8 +5,11 @@ const path = require('path');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-app.commandLine.appendSwitch('ppapi-flash-path', 'C:\\projects\\kuts-client\\src\\assets\\pepflashplayer64_32_0_0_387.dll');
+// app.commandLine.appendSwitch('ppapi-flash-path', './dist/kutc-client/assets/pepflashplayer64_32_0_0_387.dll');
+app.commandLine.appendSwitch('ppapi-flash-path', path.join(__dirname, './dist/kutc-client/assets/pepflashplayer64_32_0_0_387.dll'));
 app.commandLine.appendSwitch('ppapi-flash-version', '32.0.0.387');
+
+console.log(path.join(__dirname, 'pepflashplayer64_32_0_0_387.dll'));
 
 let win;
 
@@ -14,13 +17,12 @@ function createWindow () {
   // Create the browser window.
 
   win = new BrowserWindow({ webPreferences: {webSecurity: false, plugins: true} });
-  win.setMaximizable(false);
-  win.maximize(false);
+  win.maximize(true);
   win.setResizable(false);
 
   // and load the index.html of the app.
-  // win.loadFile('./dist/kutc-client/index.html')
-  win.loadURL('http://localhost:4200/index.html');
+  win.loadFile('./dist/kutc-client/index.html');
+  // win.loadURL('http://localhost:4200/index.html');
 
   // Open the DevTools.
   //win.webContents.openDevTools()
@@ -62,7 +64,7 @@ app.on('activate', () => {
 ipcMain.on('download', (e, args) => {
   let path = 'files';
   if (!require('fs').existsSync(path + '\\' + args.content)) {
-    download(BrowserWindow.getFocusedWindow(), 'http://localhost:8084/api/1/file/' + args.content,
+    download(BrowserWindow.getFocusedWindow(), 'http://192.168.0.10:8084/api/1/file/' + args.content,
       {directory: path, saveAs: false, showBadge: true})
       .then(e => console.log(e));
   }

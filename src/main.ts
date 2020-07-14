@@ -11,3 +11,11 @@ if (environment.production) {
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
+
+document.body.onkeydown = document.body.onkeyup = document.body.onkeypress = handle;
+function handle(e) {
+  if (e.key === 'Escape') {
+    const doc: any = document;
+    doc.webkitCancelFullScreen();
+  }
+}

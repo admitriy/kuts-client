@@ -30,7 +30,7 @@ export class FlashViewerComponent implements OnInit {
       this.flashLink = this.link + this.content.content;
       // this.flashLink = (remote.app.getAppPath() + '\\files\\' + this.content.content);
       this.objectSwf = '' +
-        '<object type="application/x-shockwave-flash" width="700px" height="700px" id="flash-id">\n' +
+        '<object type="application/x-shockwave-flash" width="700px" height="700px" id="flash-id" class="flash-class">\n' +
         '  <param name="wmode" />\n' +
         '  <param name="movie" value="' + this.flashLink + '" />\n' +
         '</object>';

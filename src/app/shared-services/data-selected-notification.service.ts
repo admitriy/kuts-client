@@ -19,8 +19,8 @@ export class DataSelectedNotificationService {
       (response) => {
         this.barManu = response;
         this.dataSource.data = this.barManu;
-        this.treeControl.dataNodes = this.dataSource.data;
-        this.treeControl.expandAll();
+        // this.treeControl.dataNodes = this.dataSource.data;
+        // this.treeControl.expandAll();
       }
     );
   }
