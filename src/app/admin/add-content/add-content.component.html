@@ -5,6 +5,10 @@
       <input matInput placeholder="Заголовок" [(ngModel)]="content.header" name="header" required>
     </mat-form-field>
 
+    <mat-form-field class="admin-element" *ngIf="content.contentType === 'ZIP'">
+      <input matInput placeholder="Исполняемый файл" [(ngModel)]="content.executeFile" name="executeFile" pattern="[a-zA-Z0-9\-\_\.]*" required>
+    </mat-form-field>
+
     <mat-form-field class="admin-element" >
       <mat-select placeholder="Выберите тип контента" [(ngModel)]="content.contentType" name="contentType" required>
         <mat-option value="PDF">PDF</mat-option>
@@ -12,6 +16,7 @@
         <mat-option value="HTML">HTML</mat-option>
         <mat-option value="TEXT">TEXT</mat-option>
         <mat-option value="MP4">MP4</mat-option>
+        <mat-option value="ZIP">ZIP</mat-option>
       </mat-select>
     </mat-form-field>
 

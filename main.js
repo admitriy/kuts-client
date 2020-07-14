@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 const { download } = require('electron-dl');
 const path = require('path');
+const DecompressZip = require('decompress-zip');
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -21,8 +22,8 @@ function createWindow () {
   // win.setResizable(false);
 
   // and load the index.html of the app.
-  win.loadFile('./dist/kutc-client/index.html');
-  // win.loadURL('http://localhost:4200/index.html');
+  // win.loadFile('./dist/kutc-client/index.html');
+  win.loadURL('http://localhost:4200/index.html');
 
   // Open the DevTools.
   //win.webContents.openDevTools()
@@ -71,8 +72,36 @@ ipcMain.on('download', (event, args) => {
         onProgress: function(e) {
           event.sender.send('download',e)
         }})
-      .then(e => event.sender.send('download',e));
+      .then(e => {
+        console.log(e);
+      });
   } else {
     event.sender.send('download', {exist: true})
   }
+});
+
+
+ipcMain.on('decompress', (event, args) => {
+  let path = 'files';
+  const zipFolder = path + '\\' +  'ZIP-' + args.file;
+
+  if (require('fs').existsSync(zipFolder)) {
+    event.sender.send('decompress', {done: 'OLD'});
+  } else {
+    const decompress = new DecompressZip(path + '\\' + args.file);
+
+    decompress.on('extract', function (log) {
+      decompress.closeFile();
+      event.sender.send('decompress', {done: 'NEW'});
+    });
+
+    decompress.extract({
+      path: zipFolder
+    });
+  }
+});
+
+ipcMain.on('openFile', (event, args) => {
+  let path = 'files';
+  shell.openItem(__dirname + '\\' + path + '\\' + args.path);
 });

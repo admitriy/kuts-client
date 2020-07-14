@@ -5,5 +5,6 @@ export interface NavigationBarItemContent {
     header: string;
     contentType: string;
     content: string;
+    executeFile: string;
     node: GetNavigationBarItemsResponse;
 }

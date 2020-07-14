@@ -40,6 +40,8 @@ import {TestResultComponent} from './admin/test-result/test-result.component';
 import {TestResultRoute} from './admin/test-result/test-result.route';
 import {Mp4ViewerRoute} from './main/files/mp4-viewer/mp4-viewer.route';
 import {Mp4ViewerComponent} from './main/files/mp4-viewer/mp4-viewer.component';
+import {ZipViewerRoute} from './main/files/zip-viewer/zip-viewer.route';
+import {ZipViewerComponent} from './main/files/zip-viewer/zip-viewer.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import {Mp4ViewerComponent} from './main/files/mp4-viewer/mp4-viewer.component';
     AddGroupComponent,
     UserListComponent,
     TestResultComponent,
-    Mp4ViewerComponent
+    Mp4ViewerComponent,
+    ZipViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,8 @@ import {Mp4ViewerComponent} from './main/files/mp4-viewer/mp4-viewer.component';
       AddGroupRoute,
       UserListRoute,
       TestResultRoute,
-      Mp4ViewerRoute]) //TODO
+      Mp4ViewerRoute,
+      ZipViewerRoute]) //TODO
     // RouterModule.forRoot([
     //   ...MainRoute
     // ]),

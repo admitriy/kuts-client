@@ -87,7 +87,7 @@ import {Mp4ViewerComponent} from './files/mp4-viewer/mp4-viewer.component';
     // AddGroupComponent,
     // UserListComponent,
     // TestResultComponent,
-    // Mp4ViewerComponent
+    // ZipViewerComponent
   ],
   providers: [],
   exports: [],

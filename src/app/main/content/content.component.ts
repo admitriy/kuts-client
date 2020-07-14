@@ -29,26 +29,30 @@ export class ContentComponent implements OnInit {
   ngOnInit() {
     this.routeSub.params.subscribe((param) => {
       this.content = null;
+      this.percentDownload = 0;
+      this.totalMb = 0;
+      this.currentMb = 0;
+      this.downloadComplete = false;
       this.navigationBarService.getContentByNodeId(param.nodeId).subscribe(content => {
         if (content) {
-          this.percentDownload = 0;
-          this.totalMb = 0;
-          this.currentMb = 0;
-          this.downloadComplete = false;
-
           ipcRenderer.send('download', {
-            content: content.content
+            content: content.content,
+            contentType: content.contentType
           });
 
           ipcRenderer.on('download', (e, args) => {
+            let complete = false;
             if (args.percent) {
               this.percentDownload = +(args.percent * 100).toFixed(2);
               this.totalMb = +(args.totalBytes / 1048576).toFixed(2);
               this.currentMb = +(args.transferredBytes / 1048576).toFixed(2);
-              this.downloadComplete = this.percentDownload === 100 && this.currentMb === this.totalMb;
+              complete = this.percentDownload === 100 && this.currentMb === this.totalMb;
             } else if (args.exist) {
-              this.downloadComplete = true;
+              complete = true;
             }
+
+            this.downloadComplete = complete;
+
             this.ref.tick();
           });
         }
