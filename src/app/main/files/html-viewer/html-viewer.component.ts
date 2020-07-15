@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationBarService } from '../../../http-client/navigation-bar.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
-import {AppSettings} from '../../../constants/AppSettings';
 import {remote} from 'electron';
 
 @Component({
@@ -14,7 +13,6 @@ import {remote} from 'electron';
 export class HtmlViewerComponent implements OnInit {
   objecthtml;
   htmlLink;
-  link = AppSettings.API + 'file/';
   @Input() content: NavigationBarItemContent;
 
   @ViewChild('htmlDiv') swfDiv;

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarItemContent} from '../../http-client/response/content/navigation-bar-item-content';
 import { download } from 'electron-dl';
 import { remote, ipcRenderer } from 'electron';
+import {AppSettings} from '../../constants/AppSettings';
 
 @Component({
   selector: 'app-content',
@@ -38,7 +39,8 @@ export class ContentComponent implements OnInit {
         if (content) {
           ipcRenderer.send('download', {
             content: content.content,
-            contentType: content.contentType
+            contentType: content.contentType,
+            backendUrl: AppSettings.API
           });
 
           ipcRenderer.on('download', (e, args) => {

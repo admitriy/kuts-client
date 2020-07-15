@@ -6,7 +6,7 @@
     </mat-form-field>
 
     <mat-form-field class="admin-element" *ngIf="content.contentType === 'ZIP'">
-      <input matInput placeholder="Исполняемый файл" [(ngModel)]="content.executeFile" name="executeFile" pattern="[a-zA-Z0-9\-\_\.]*" required>
+      <input matInput placeholder="Исполняемый файл" [(ngModel)]="content.executeFile" name="executeFile" pattern="[a-zA-Z0-9\-\_\.\\/]*" required>
     </mat-form-field>
 
     <mat-form-field class="admin-element" >

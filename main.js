@@ -23,9 +23,9 @@ function createWindow () {
   // win.setResizable(false);
 
   // and load the index.html of the app.
-  win.loadFile('./dist/kutc-client/index.html');
+  // win.loadFile('./dist/kutc-client/index.html');
   // win.loadFile('C:/Users/Mi/Desktop/index.html');
-  // win.loadURL('http://localhost:4200/index.html');
+  win.loadURL('http://localhost:4200/index.html');
 
   // Open the DevTools.
   //win.webContents.openDevTools()
@@ -42,7 +42,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
@@ -67,7 +67,7 @@ app.on('activate', () => {
 ipcMain.on('download', (event, args) => {
   let path = app.getAppPath() + '\\files';
   if (!require('fs').existsSync(path + '\\' + args.content)) {
-    download(BrowserWindow.getFocusedWindow(), 'http://localhost:8084/api/1/file/' + args.content, {
+    download(BrowserWindow.getFocusedWindow(), args.backendUrl + 'file/' + args.content, {
         directory: path,
         saveAs: false,
         showBadge: true,
@@ -95,6 +95,11 @@ ipcMain.on('decompress', (event, args) => {
     decompress.on('extract', function (log) {
       decompress.closeFile();
       event.sender.send('decompress', {done: 'NEW'});
+    });
+
+    decompress.on('progress', function (fileIndex, fileCount) {
+      console.log({progress: true, fileIndex: fileIndex+1, fileCount: fileCount});
+      event.sender.send('decompress', {progress: true, fileIndex: fileIndex+1, fileCount: fileCount});
     });
 
     decompress.extract({

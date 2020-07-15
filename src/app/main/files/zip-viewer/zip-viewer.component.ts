@@ -2,7 +2,6 @@ import {Component, OnInit, Input, ApplicationRef} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavigationBarService } from '../../../http-client/navigation-bar.service';
 import {NavigationBarItemContent} from '../../../http-client/response/content/navigation-bar-item-content';
-import {AppSettings} from '../../../constants/AppSettings';
 import { remote, ipcRenderer } from 'electron';
 
 @Component({
@@ -16,24 +15,36 @@ export class ZipViewerComponent implements OnInit {
   @Input() content: NavigationBarItemContent;
   zipComplete: boolean;
 
+  fileIndex;
+  fileCount;
+
   constructor(
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
     private ref: ApplicationRef) { }
 
   ngOnInit() {
+    this.fileCount = 0;
+    this.fileIndex = 0;
     if (this.content) {
       ipcRenderer.send('decompress', {file: this.content.content});
 
       ipcRenderer.on('decompress', (event, decompressData) => {
         if (decompressData.done && !this.zipComplete) {
-          console.log(decompressData);
           if (decompressData.done === 'NEW') {
-            setTimeout(() => { this.openFile(); }, 500); //TODO боже прости
+            setTimeout(() => {
+              this.zipComplete = true;
+              this.ref.tick();
+              }, 2000);
           } else {
-            this.openFile();
+            this.zipComplete = true;
+            this.ref.tick();
           }
-          this.zipComplete = true;
+        }
+
+        if (decompressData.progress && !this.zipComplete) {
+          this.fileCount = decompressData.fileCount;
+          this.fileIndex = decompressData.fileIndex;
           this.ref.tick();
         }
       });

@@ -1,4 +1,13 @@
 <div *ngIf="zipComplete" class="zip-class">
-  <h3>Учебные материалы откроются в новом окне</h3>
+  <h4 style="text-align: center">Для того чтобы открыть учебные материалы, нажмите по кнопке ниже</h4>
   <p>Исполняемый файл: {{content.executeFile}}</p>
+  <button type = "button" class="admin-element" mat-raised-button #upload
+               (click)="openFile();"
+               color="basic" style="width: 300px">
+  Открыть учебные материалы
+  </button>
+</div>
+
+<div *ngIf="!zipComplete" class="zip-class">
+  <p>Разархивировано {{fileIndex}} из {{fileCount}}</p>
 </div>
