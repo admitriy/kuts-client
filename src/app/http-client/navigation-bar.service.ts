@@ -27,6 +27,10 @@ export class NavigationBarService {
   ) {
   }
 
+  nodeOrder(parentId: string) {
+    return this.http.get<number>(AppSettings.API + 'node/order/parent/' + (parentId ? parentId : '0'), this.getAuthourisationHeader());
+  }
+
   healthCheck() {
     return this.http.get(AppSettings.API + 'health');
   }

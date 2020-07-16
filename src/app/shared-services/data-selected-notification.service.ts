@@ -34,13 +34,4 @@ export class DataSelectedNotificationService {
       }
     );
   }
-
-  // getFromFile() {
-  //   ipcRenderer.send('findAllRead', {});
-  //   ipcRenderer.on('findAllRead', (e, args) => {
-  //     this.barManu = args.json;
-  //     this.dataSource.data = this.barManu;
-  //     this.ref.tick();
-  //   });
-  // }
 }

@@ -14,6 +14,7 @@ import {DataSelectedNotificationService} from '../../shared-services/data-select
 })
 export class AddNodeComponent implements OnInit {
   node: GetNavigationBarItemsResponse;
+  orders: string[] = [];
 
   constructor(private location: Location,
               private navigationBarService: NavigationBarService,
@@ -23,14 +24,30 @@ export class AddNodeComponent implements OnInit {
   ngOnInit() {
     this.node = {} as GetNavigationBarItemsResponse;
     this.routeSub.params.subscribe((param) => {
-      if (param.parentId) {
-        this.node.parentNode = param.parentId;
+      if (param.parentId || !param.nodeId) {
+        this.navigationBarService.nodeOrder(param.parentId).subscribe(e => {
+          this.createOrders(e);
+          this.orders.push( String(e + 1) );
+          this.node.orderNode = String(e + 1);
+          this.node.parentNode = param.parentId;
+        });
       } else if (param.nodeId) {
-        this.navigationBarService.getNodeByNodeId(param.nodeId).subscribe(node => this.node = node);
+        this.navigationBarService.getNodeByNodeId(param.nodeId).subscribe(node => {
+          this.navigationBarService.nodeOrder(node.parentNode).subscribe(e => {
+            this.createOrders(e);
+            this.node = node;
+            this.node.orderNode = this.orders.filter(elem => elem === String(this.node.orderNode))[0];
+          });
+        });
       }
     });
   }
 
+  createOrders(order: number) {
+    for (let i = 1; i <= order; i++) {
+      this.orders.push(String(i));
+    }
+  }
 
   save() {
     this.navigationBarService.saveNode(this.node).subscribe(e => {

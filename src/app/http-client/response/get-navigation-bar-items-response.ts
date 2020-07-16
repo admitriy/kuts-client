@@ -11,4 +11,5 @@ export interface GetNavigationBarItemsResponse {
     hasTest: boolean;
     hasContent: boolean;
     content: NavigationBarItemContent;
+    orderNode: string;
 }

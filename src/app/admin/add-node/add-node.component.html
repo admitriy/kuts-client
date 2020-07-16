@@ -5,6 +5,12 @@
       <input matInput placeholder="Название" [(ngModel)]="node.fullName" name="fullName" required>
     </mat-form-field>
 
+    <mat-form-field class="admin-element">
+      <mat-select [disabled]="!node.id" placeholder="Выберите порядковый номер" [(value)]="node.orderNode" name="orderNode" required>
+        <mat-option *ngFor="let order of orders;" [value]="order">{{order}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button class="admin-element" mat-raised-button color="primary" [disabled]="!editForm.valid">Сохранить</button>
     <button type = "button" (click)="back()" class="admin-element" mat-raised-button>Назад</button>
   </div>
