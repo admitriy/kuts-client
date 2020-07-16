@@ -54,8 +54,9 @@ export class ContentComponent implements OnInit {
             this.percentDownload = +(args.percent * 100).toFixed(2);
             this.totalMb = +(args.totalBytes / 1048576).toFixed(2);
             this.currentMb = +(args.transferredBytes / 1048576).toFixed(2);
-            complete = this.percentDownload === 100 && this.currentMb === this.totalMb;
-          } else if (args.exist) {
+          }
+
+          if (args.exist) {
             complete = true;
           }
 
@@ -67,11 +68,10 @@ export class ContentComponent implements OnInit {
 
           this.ref.tick();
         });
-
         this.content = {} as NavigationBarItemContent;
-        this.content.contentType = param.contentType;
         this.content.content = param.content;
         this.content.executeFile = param.executeFile;
+        this.content.contentType = param.contentType;
       }
       this.currentNode = param.nodeId;
       this.hasTest = param.hasTest === 'true';

@@ -77,7 +77,8 @@ ipcMain.on('download', (event, args) => {
         }
       })
         .then(e => {
-          console.log(e);
+          console.log('Download ' + args.file);
+          event.sender.send('download', {exist: true})
         });
     } else {
       event.sender.send('download', {notExist: true})
@@ -92,6 +93,7 @@ ipcMain.on('decompress', (event, args) => {
   let path = app.getAppPath() + '\\files';
   const zipFolder = path + '\\' +  'ZIP-' + args.file;
 
+  console.log('DECOMPRESS ' + args.file);
   if (require('fs').existsSync(zipFolder)) {
     event.sender.send('decompress', {done: 'OLD'});
   } else {
