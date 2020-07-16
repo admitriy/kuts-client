@@ -22,6 +22,8 @@ export class AppComponent implements OnInit {
   roleCookieConstant = 'kuts-role';
   tokenCookieConstant = 'kuts-token';
 
+  serverCheck: boolean;
+
   constructor(
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
@@ -32,13 +34,19 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (this.navigationBarService.kutsToken) {
-      this.isAuthorized = true;
-    }
-
     this.register.group = {} as Group;
-    this.navigationBarService.getAllGroups().subscribe(groups => {
-      this.groups = groups;
+    this.navigationBarService.healthCheck().subscribe(e => {
+      this.serverCheck = true;
+      if (this.navigationBarService.kutsToken) {
+        this.isAuthorized = true;
+      }
+      this.navigationBarService.getAllGroups().subscribe(groups => {
+        this.groups = groups;
+      });
+    }, error => {
+      this.serverCheck = true;
+      this.isAuthorized = true;
+      this.dataSelectedNotificationService.online = false;
     });
   }
 

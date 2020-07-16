@@ -50,7 +50,17 @@ export class NavigationBarComponent implements OnInit{
     if (this.isPanel()) {
       this.router.navigate(['/panel/node', this.selectedNode.id]);
     } else {
-      this.router.navigate(['/content', this.selectedNode.id, this.selectedNode.hasTest]);
+      if (this.selectedNode.content) {
+        const exFile = this.selectedNode.content.executeFile ? this.selectedNode.content.executeFile : 'false';
+        this.router.navigate(['/content',
+          this.selectedNode.id,
+          this.selectedNode.content.content,
+          this.selectedNode.content.contentType,
+          exFile,
+          this.selectedNode.hasTest]);
+      } else {
+        this.router.navigate(['/content', this.selectedNode.id, 'false', 'false', 'false', this.selectedNode.hasTest]);
+      }
     }
   }
 

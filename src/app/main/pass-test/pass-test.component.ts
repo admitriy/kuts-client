@@ -5,6 +5,7 @@ import {ItemNodeTest} from '../../http-client/response/test/item-node-test';
 import {ItemQuestion} from '../../http-client/response/test/item-question';
 import {ItemChoice} from '../../http-client/response/test/item-choice';
 import {ItemTestValidate} from '../../http-client/response/test/item-test-validate';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-pass-test',
@@ -21,7 +22,8 @@ export class PassTestComponent implements OnInit {
   constructor(
     private routeSub: ActivatedRoute,
     private navigationBarService: NavigationBarService,
-    private router: Router) {
+    private router: Router,
+    private location: Location) {
   }
 
   ngOnInit() {
@@ -58,6 +60,6 @@ export class PassTestComponent implements OnInit {
   }
 
   backToConent() {
-    this.router.navigate(['/content', this.nodeId, true]);
+    this.location.back();
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavigationBarService} from '../../http-client/navigation-bar.service';
 import {DataSelectedNotificationService} from '../../shared-services/data-selected-notification.service';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-admin-panel',
@@ -13,7 +14,8 @@ export class AdminPanelComponent implements OnInit {
   constructor(private router: Router,
               private routeSub: ActivatedRoute,
               private navigationBarService: NavigationBarService,
-              public dataSelectedNotificationService: DataSelectedNotificationService){ }
+              public dataSelectedNotificationService: DataSelectedNotificationService,
+              private _snackBar: MatSnackBar){ }
 
   ngOnInit() {
     this.routeSub.params.subscribe((param) => {
@@ -44,6 +46,15 @@ export class AdminPanelComponent implements OnInit {
   deleteNode() {
     this.navigationBarService.deleteNode(this.node).subscribe(() => {
       this.dataSelectedNotificationService.getNavigationBarItems();
+      this.node = null;
+    }, error => {
+      this.openSnackBar(error.error.message, 'OK');
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
     });
   }
 }

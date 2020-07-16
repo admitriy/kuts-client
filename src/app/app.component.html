@@ -1,24 +1,24 @@
 <div class="wrapper">
   <app-header-main></app-header-main>
 
-  <button *ngIf="isAuthorized" mat-button [matMenuTriggerFor]="menu">Меню</button>
+  <button *ngIf="serverCheck && isAuthorized && dataSelectedNotificationService.online" mat-button [matMenuTriggerFor]="menu">Меню</button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click) = "toContent()">Контент</button>
+    <button mat-menu-item (click) = "toContent()">Учебные материалы</button>
     <button mat-menu-item routerLink="/panel/node" *ngIf="isAdmin()">Редактирование контента</button>
     <button mat-menu-item routerLink="/panel/group-list" *ngIf="isAdmin()">Группы</button>
     <button mat-menu-item (click)="exit();">Выйти</button>
   </mat-menu>
 
-  <div *ngIf="isAuthorized">
+  <div *ngIf="serverCheck && isAuthorized">
     <app-navigation-bar class="menu"></app-navigation-bar>
   </div>
-  <div [hidden]="!isAuthorized">
+  <div [hidden]="!isAuthorized || !serverCheck">
     <div class="content">
       <router-outlet></router-outlet>
     </div>
   </div>
 
-  <div *ngIf="!isAuthorized" class="auth-tab">
+  <div *ngIf="serverCheck && !isAuthorized" class="auth-tab">
     <mat-tab-group>
       <mat-tab label="Авторизация">
         <form name="authForm" role="form" novalidate #authForm="ngForm"
@@ -57,5 +57,9 @@
         </form>
       </mat-tab>
     </mat-tab-group>
+  </div>
+
+  <div *ngIf="!serverCheck" class="auth-tab" style="margin-top: 200px">
+    <mat-spinner></mat-spinner>
   </div>
 </div>

@@ -34,17 +34,17 @@ export class TestResultComponent implements OnInit {
       if (param.userId) {
         this.navigationBarService.getTestResultByUserID(param.userId).subscribe(testResults => {
           if (testResults) {
-            let results = [];
+            const results = [];
             testResults.forEach(testResult => {
               let rightQuestions = 0;
               let allNumber = 0;
               Object.keys(testResult.resultTest).map((key, value) => {
-                if (testResult.resultTest[key]) {
+                if (testResult.resultTest[key].correct) {
                   rightQuestions += 1;
                 }
                 allNumber += 1;
               });
-              let result = {} as TestResultShow;
+              const result = {} as TestResultShow;
               result.testName = testResult.test.testName;
               result.createDate = testResult.createDate;
               result.allQuestion = allNumber;

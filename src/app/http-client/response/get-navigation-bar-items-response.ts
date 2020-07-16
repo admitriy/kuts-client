@@ -10,4 +10,5 @@ export interface GetNavigationBarItemsResponse {
     children?: GetNavigationBarItemsResponse[];
     hasTest: boolean;
     hasContent: boolean;
+    content: NavigationBarItemContent;
 }

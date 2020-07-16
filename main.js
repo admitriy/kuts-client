@@ -67,16 +67,21 @@ app.on('activate', () => {
 ipcMain.on('download', (event, args) => {
   let path = app.getAppPath() + '\\files';
   if (!require('fs').existsSync(path + '\\' + args.content)) {
-    download(BrowserWindow.getFocusedWindow(), args.backendUrl + 'file/' + args.content, {
+    if (args.online) {
+      download(BrowserWindow.getFocusedWindow(), args.backendUrl + 'file/' + args.content, {
         directory: path,
         saveAs: false,
         showBadge: true,
-        onProgress: function(e) {
-          event.sender.send('download',e)
-        }})
-      .then(e => {
-        console.log(e);
-      });
+        onProgress: function (e) {
+          event.sender.send('download', e)
+        }
+      })
+        .then(e => {
+          console.log(e);
+        });
+    } else {
+      event.sender.send('download', {notExist: true})
+    }
   } else {
     event.sender.send('download', {exist: true})
   }
@@ -111,4 +116,9 @@ ipcMain.on('decompress', (event, args) => {
 ipcMain.on('openFile', (event, args) => {
   let path = 'files';
   shell.openItem(app.getAppPath() + '\\' + path + '\\' + args.path);
+});
+
+
+ipcMain.on('findAllSave', (event, args) => {
+  require('fs').writeFileSync('findAll.json', JSON.stringify(args.json), 'utf-8');
 });

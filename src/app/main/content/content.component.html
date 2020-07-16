@@ -1,12 +1,12 @@
-<div *ngIf = "!this.downloadComplete && totalMb > 0">
+<div *ngIf = "!downloadComplete && totalMb > 0 && !notExist">
   <h2>Загружено {{currentMb}} из {{totalMb}}</h2>
-  <mat-progress-bar mode="determinate" value="{{this.percentDownload}}"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" value="{{percentDownload}}"></mat-progress-bar>
 </div>
 
-<div *ngIf = "this.downloadComplete">
-  <button [hidden]="!hasTest" class="test-button" mat-raised-button color="primary" (click)="navigateToTest()">Пройти тестирование</button>
+<div>
+  <button *ngIf="hasTest && dataSelectedNotificationService.online" class="test-button" mat-raised-button color="primary" (click)="navigateToTest()">Пройти тестирование</button>
   <button class="test-button" mat-raised-button color="primary" (click)="fullScreen()" *ngIf="content && content.contentType && content.contentType == 'FLESH'" style="margin-left: 30px;">Полноэкранный режим</button>
-  <div class="content" id="content-child">
+  <div class="content" id="content-child" *ngIf="downloadComplete && !notExist">
     <div *ngIf="content && content.contentType">
       <app-flash-viewer [(content)]="content" *ngIf="content.contentType == 'FLESH'"></app-flash-viewer>
       <app-pdf-viewer [(content)]="content" *ngIf="content.contentType == 'PDF'"></app-pdf-viewer>
@@ -15,4 +15,8 @@
       <app-zip-viewer [(content)]="content" *ngIf="content.contentType == 'ZIP'"></app-zip-viewer>
     </div>
   </div>
+</div>
+
+<div *ngIf="notExist" style="margin-top: 200px">
+  <h4>Учебных материалов нет в локальной папке, загрузка невозможна из-за отсутсвия подключения к серверу</h4>
 </div>

@@ -27,8 +27,16 @@ export class NavigationBarService {
   ) {
   }
 
-  getItems() {
-    return this.http.get<GetNavigationBarItemsResponse[]>(AppSettings.API + 'node/findAll', this.getAuthourisationHeader());
+  healthCheck() {
+    return this.http.get(AppSettings.API + 'health');
+  }
+
+  getItems(online: boolean, appPath: string) {
+    if (online) {
+      return this.http.get<GetNavigationBarItemsResponse[]>(AppSettings.API + 'node/findAll', this.getAuthourisationHeader());
+    } else {
+      return this.http.get<GetNavigationBarItemsResponse[]>('file:///' + appPath + '/findAll.json');
+    }
   }
 
   getNodeByNodeId(id: string) {
