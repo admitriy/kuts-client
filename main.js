@@ -122,5 +122,5 @@ ipcMain.on('openFile', (event, args) => {
 
 
 ipcMain.on('findAllSave', (event, args) => {
-  require('fs').writeFileSync('findAll.json', JSON.stringify(args.json), 'utf-8');
+  require('fs').writeFileSync(app.getAppPath() + '\\findAll.json', JSON.stringify(args.json), 'utf-8');
 });

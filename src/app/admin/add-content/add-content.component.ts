@@ -26,10 +26,9 @@ export class AddContentComponent implements OnInit {
         this.navigationBarService.getContentByNodeId(param.nodeId).subscribe(content => {
           if (content) {
             this.content = content;
-          } else {
-            this.content.node = {} as GetNavigationBarItemsResponse;
-            this.content.node.id = param.nodeId;
           }
+          this.content.node = {} as GetNavigationBarItemsResponse;
+          this.content.node.id = param.nodeId;
         });
       }
     });
