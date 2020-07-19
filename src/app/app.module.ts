@@ -42,6 +42,7 @@ import {Mp4ViewerRoute} from './main/files/mp4-viewer/mp4-viewer.route';
 import {Mp4ViewerComponent} from './main/files/mp4-viewer/mp4-viewer.component';
 import {ZipViewerRoute} from './main/files/zip-viewer/zip-viewer.route';
 import {ZipViewerComponent} from './main/files/zip-viewer/zip-viewer.component';
+import {NgxScrollTopModule} from 'ngx-scrolltop';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import {ZipViewerComponent} from './main/files/zip-viewer/zip-viewer.component';
     ZipViewerComponent
   ],
   imports: [
+    NgxScrollTopModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,

@@ -1,5 +1,5 @@
 <div *ngIf = "!downloadComplete && totalMb > 0 && !notExist">
-  <h2>Загружено {{currentMb}} из {{totalMb}}</h2>
+  <h2>Загружено {{currentMb}} из {{totalMb}} мб</h2>
   <mat-progress-bar mode="determinate" value="{{percentDownload}}"></mat-progress-bar>
 </div>
 
